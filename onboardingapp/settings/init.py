@@ -7,10 +7,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "django.contrib.sites",    
     # ..
     'team',
     'services',
     # ..
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',    
 ]
 
 ROOT_URLCONF = None
