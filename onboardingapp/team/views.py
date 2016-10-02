@@ -569,14 +569,12 @@ def create_team(request):
 
         # ...
         is_member = form.cleaned_data['is_member']        
-        print(is_member)
         if is_member:
             team.member.add(request.user)
-        # team.save()
         # ...
         org.team.add(team)
-        # org.save()
 
+        # ...
         messages.success(request, 'The team {} was created successfully'.format(team.name))
         data = {'href': '/team/' + str(team.id)}
         return JsonResponse(data, status=200)
