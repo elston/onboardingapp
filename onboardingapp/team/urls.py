@@ -49,6 +49,10 @@ urlpatterns = [
         views.remove_member, 
             name='remove_member'),
 
+    url(r'^team/invite/remove$', 
+        views.remove_invite, 
+            name='remove_invite'),    
+
     url(r'^team/(?P<t_id>\d+)/member/(?P<m_id>\d+)/accept-invitation-step1$',
         views.accept_invitation_step1, 
             name='accept_invitation_step1'),

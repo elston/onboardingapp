@@ -93,9 +93,9 @@ sudo -u $USER bash -c "
     # /$PROJDIR/$PROJECT/manage.py makemigrations team
     # /$PROJDIR/$PROJECT/manage.py makemigrations organization
     # /$PROJDIR/$PROJECT/manage.py makemigrations services    
-    /$PROJDIR/$PROJECT/manage.py migrate
-    /$PROJDIR/$PROJECT/manage.py loaddata /$PROJDIR/$PROJECT/team/fixtures/team_default_testdata.json
-    /$PROJDIR/$PROJECT/manage.py loaddata /$PROJDIR/$PROJECT/team/fixtures/org_default_testdata.json    
+    # /$PROJDIR/$PROJECT/manage.py migrate
+    # /$PROJDIR/$PROJECT/manage.py loaddata /$PROJDIR/$PROJECT/team/fixtures/team_default_testdata.json
+    # /$PROJDIR/$PROJECT/manage.py loaddata /$PROJDIR/$PROJECT/team/fixtures/org_default_testdata.json    
 "
 
 #...

@@ -11,5 +11,5 @@ class Organization(models.Model):
     team = models.ManyToManyField(
         'team.Team', related_name='organization_team', blank=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name

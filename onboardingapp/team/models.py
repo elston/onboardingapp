@@ -27,7 +27,7 @@ class Service(models.Model):
     team_id = models.CharField(max_length=200, null=True, blank=True)
     is_active = models.BooleanField(default=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -42,7 +42,7 @@ class Account(models.Model):
     description = models.TextField(null=True, blank=True)
     stripe_id = models.CharField(max_length=50)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -60,7 +60,7 @@ class TeamUser(AbstractUser):
     customer_id = models.CharField(max_length=50, null=True, blank=True)
     subscription_id = models.CharField(max_length=50, null=True, blank=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.username
 
 
@@ -74,11 +74,13 @@ class Team(models.Model):
     admin = models.ManyToManyField(TeamUser, related_name="admin")
     member = models.ManyToManyField(
         TeamUser, related_name='team_member', blank=True)
+    invited = models.ManyToManyField(
+        TeamUser, related_name='team_invited', blank=True)
     service = models.ManyToManyField(
         Service, related_name='team_service', blank=True)
     is_active = models.BooleanField(default=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -102,5 +104,5 @@ class AdditionalInfo(models.Model):
     service = models.ForeignKey(Service, related_name='service_info')
     data = models.CharField(max_length=255, blank=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.data

@@ -76,11 +76,10 @@ function invite_team_member(email, team_id)
     return false;
 }
 
-function remove_member(m_id, t_id)
-{
-    var r = confirm("Are you sure to remove this member?");
+function remove_chlen(chlen,m_id, t_id){
+    var r = confirm("Are you sure to remove this "+chlen+"?");
     if (r == true) {
-        $.post('/team/member/remove', {'m_id': m_id, 't_id': t_id})
+        $.post('/team/'+chlen+'/remove', {'m_id': m_id, 't_id': t_id})
             .success(function(result){
                 location.reload();
             })
@@ -90,4 +89,12 @@ function remove_member(m_id, t_id)
     } else {
         return false;
     }
-}
+};
+
+function remove_member(m_id, t_id){
+    remove_chlen('member',m_id, t_id);
+};
+
+function remove_invite(m_id, t_id){
+    remove_chlen('invite',m_id, t_id);
+};

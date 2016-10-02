@@ -23,6 +23,8 @@ from allauth.account.signals import user_signed_up
 from django.contrib.auth import logout
 from django.template.loader import render_to_string
 from django.core.urlresolvers import reverse_lazy
+from django.utils.encoding import force_bytes
+
 
 from organization.models import Organization
 
@@ -168,6 +170,7 @@ def team_info(request, id):
         raise Http404
 
     members = team.member.all()
+    invites = team.invited.all()    
     team_services = team.service.all()
 
     error_log = ErrorLog.objects.filter(team=team).order_by('user')
@@ -182,6 +185,7 @@ def team_info(request, id):
     context = {
         'team': team,
         'members': members,
+        'invites':invites,
         'admins': admins,
         'services': team_services,
         'error_log': error_log,
@@ -442,7 +446,8 @@ def accept_invitation_step1(request, m_id, t_id):
         logout(request)
         return redirect(reverse_lazy('account_login')+'?next='+url)
 
-    team = Team.objects.filter(id=t_id, member=teamuser)
+    # team = Team.objects.filter(id=t_id, member=teamuser)
+    team = Team.objects.filter(id=t_id, invited=teamuser)
     if team:
         team = team[0]
         services = team.service.all()
@@ -495,7 +500,8 @@ def accept_invitation_step2(request, m_id, t_id):
         logout(request)
         return redirect(reverse_lazy('account_login'), kwargs={'next': url})
 
-    team = Team.objects.filter(id=t_id, member=teamuser)
+    # team = Team.objects.filter(id=t_id, member=teamuser)
+    team = Team.objects.filter(id=t_id, invited=teamuser)
     if team:
         team = team[0]
         services = team.service.all()
@@ -504,7 +510,10 @@ def accept_invitation_step2(request, m_id, t_id):
         for service in services:
             ObjClass = getattr(eval(service.name), service.name)()
             ObjClass.add_member_individual(teamuser, service, team)
-
+        # ..
+        team.member.add(teamuser)
+        team.invited.remove(teamuser)        
+        # ..
         context = {
             'teamuser': teamuser,
             'services': services,
@@ -568,8 +577,7 @@ def create_team(request):
         team.save()
 
         # ...
-        is_member = form.cleaned_data['is_member']        
-        if is_member:
+        if form.cleaned_data['is_member']:
             team.member.add(request.user)
         # ...
         org.team.add(team)
@@ -635,11 +643,40 @@ def remove_member(request):
     messages.success(request, 'The member is removed successfully!')
     return JsonResponse({}, status=200)
 
+@login_required
+@require_http_methods(["POST"])
+@csrf_exempt
+def remove_invite(request):
+    t_id = request.POST.get('t_id')
+    team = None
+
+    try:
+        team = Team.objects.get(id=t_id)
+    except Team.DoesNotExist:
+        messages.error(request, 'Team does not exist')
+        return JsonResponse({}, status=404)
+
+    if team:
+        admins = team.admin.all()
+
+    if not team or (request.user != team.owner and request.user not in admins):
+        messages.error(request, 'You don\'t have permission')
+        return JsonResponse({}, status=403)
+
+    m_id = request.POST.get('m_id')
+    teamuser = TeamUser.objects.get(id=m_id)
+    team.invited.remove(teamuser)
+
+
+    messages.success(request, 'The invite is removed successfully!')
+    return JsonResponse({}, status=200)
+
 
 @login_required
 @require_http_methods(["POST"])
 @csrf_exempt
 def invite_user(request):
+    # ...
     form = UserInviteForm(request.POST)
 
     if form.is_valid():
@@ -669,8 +706,8 @@ def invite_user(request):
             """ % (team.name, team.id, teamuser.id)
         else:
             # generate temporary password
-            salt = hashlib.sha1(str(random.random())).hexdigest()[:5]
-            password = hashlib.sha1(salt+user_email).hexdigest()
+            salt = hashlib.sha1(force_bytes(str(random.random()))).hexdigest()[:5]
+            password = hashlib.sha1(force_bytes(salt+user_email)).hexdigest()
 
             teamuser = TeamUser()
             teamuser.username = user_email.split('@')[0]
@@ -694,13 +731,15 @@ def invite_user(request):
                 team.id, teamuser.id, teamuser.email, password
             )
 
-        # check he is already there
-        team.member.add(teamuser)
+        # # check he is already there
+        # team.member.add(teamuser)
 
-        if form.cleaned_data['admin']:
-            team.admin.add(teamuser)
+        # if form.cleaned_data['admin']:
+        #     team.admin.add(teamuser)
 
-        team.save()
+        # team.save()
+
+        team.invited.add(teamuser)
 
         if len(teamuser.first_name) > 0:
             header_string = 'Dear {},'.format(teamuser.first_name)

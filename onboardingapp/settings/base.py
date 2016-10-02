@@ -168,3 +168,13 @@ STRIPE_KEYS = {
     'stripe_secret_key': 'sk_test_1AFSPD5Dg8RihyPPtylWiSsR',
     'publishable_key': 'pk_test_Q4RGBzPFhWbMP2daCqMg6Rj7'
 }
+
+
+# Mail send params for gmail
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'allstacksnoreply@gmail.com'
+EMAIL_HOST_PASSWORD = 'Chiefspooker1'
+DEFAULT_FROM_EMAIL = 'allstacks@raviolilabs.com'
+EMAIL_PORT = 587
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
