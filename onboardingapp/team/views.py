@@ -567,8 +567,15 @@ def create_team(request):
         team.description = form.cleaned_data['team_description']
         team.save()
 
+        # ...
+        is_member = form.cleaned_data['is_member']        
+        print(is_member)
+        if is_member:
+            team.member.add(request.user)
+        # team.save()
+        # ...
         org.team.add(team)
-        org.save()
+        # org.save()
 
         messages.success(request, 'The team {} was created successfully'.format(team.name))
         data = {'href': '/team/' + str(team.id)}
