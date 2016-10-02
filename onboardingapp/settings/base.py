@@ -36,7 +36,8 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-
+    # ...
+    'organization',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -160,3 +161,10 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_CONFIRM_EMAIL_ON_GET = False
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
 ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
+
+
+# change with your stripe keys
+STRIPE_KEYS = {
+    'stripe_secret_key': 'sk_test_1AFSPD5Dg8RihyPPtylWiSsR',
+    'publishable_key': 'pk_test_Q4RGBzPFhWbMP2daCqMg6Rj7'
+}

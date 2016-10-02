@@ -65,7 +65,7 @@ class Jira:
             jira = JIRA(options,
                         basic_auth=('admin',
                                     form.cleaned_data['password']))
-        except JIRAError, e:
+        except JIRAError as e:
             form.errors['err'] = JIRA_ERRORS[e.status_code]
 
         return jira

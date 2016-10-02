@@ -34,6 +34,11 @@ sudo apt-get -y install \
     python-pip \
     python3-pip
 
+sudo apt-get -y install \
+    build-essential \
+    libssl-dev \
+    libffi-dev
+#......................................
 sudo pip install --upgrade \
     pip \
     virtualenv
@@ -85,9 +90,12 @@ sudo -u $USER bash -c "
     # ..
     export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
     # ...
-    /$PROJDIR/$PROJECT/manage.py makemigrations team    
-    /$PROJDIR/$PROJECT/manage.py migrate
-    /$PROJDIR/$PROJECT/manage.py loaddata /$PROJDIR/$PROJECT/team/fixtures/team_default_testdata.json
+    # /$PROJDIR/$PROJECT/manage.py makemigrations team
+    # /$PROJDIR/$PROJECT/manage.py makemigrations organization
+    # /$PROJDIR/$PROJECT/manage.py makemigrations services    
+    # /$PROJDIR/$PROJECT/manage.py migrate
+    # /$PROJDIR/$PROJECT/manage.py loaddata /$PROJDIR/$PROJECT/team/fixtures/team_default_testdata.json
+    # /$PROJDIR/$PROJECT/manage.py loaddata /$PROJDIR/$PROJECT/team/fixtures/org_default_testdata.json    
 "
 
 #...

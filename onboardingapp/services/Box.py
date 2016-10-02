@@ -58,7 +58,6 @@ class Box:
         try:
             access_token, refresh_token = oauth.authenticate(code)
         except Exception as e:
-            print e
             return redirect(reverse_lazy('team_info', kwargs={'id': team.pk}))
 
         client = Client(oauth)

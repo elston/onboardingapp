@@ -64,7 +64,7 @@ class Trello:
                 else:
                     form.errors['err'] = TRELLO_ERRORS[502]
 
-        except Exception, e:
+        except Exception as e:
             if e.status == 401 or e.status == 502:
                 form.errors['err'] = TRELLO_ERRORS[e.status]
             else:
