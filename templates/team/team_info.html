@@ -41,8 +41,9 @@
                     </div>
                 </div>
 
+                {% if invites %}
                 <div class="team-box col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div id="teambox-title"  class="col-lg-12">
+                    <div id="teambox-title"  class="col-lg-12" style="background-color: #ddbdff;">
                         <h5>INVITED</h5>
                     </div>
                     <div id="invited" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -54,6 +55,7 @@
                         {% endfor %}
                     </div>
                 </div>
+                {% endif %}                
 
             </div>
 

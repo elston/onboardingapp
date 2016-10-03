@@ -156,6 +156,7 @@ class Slack:
 
         if res.status_code == requests.codes.ok:
             res_json = res.json()
+            print(res_json)
             for item in res_json['members']:
                 try:
                     email = item['profile']['email']

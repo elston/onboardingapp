@@ -2,6 +2,7 @@ import base64
 import hashlib
 import random
 from django.conf import settings
+from django.utils.encoding import force_bytes
 
 from cryptography.fernet import Fernet
 from cryptography.hazmat.backends import default_backend
@@ -76,19 +77,19 @@ def check_services(instance, service):
 
 
 def encrypt_data(string):
-    salt = hashlib.sha1(str(random.random())).hexdigest()[:5]
-    password = bytes(hashlib.sha1(salt + settings.SECRET_KEY).hexdigest())
+    salt = hashlib.sha1(force_bytes(str(random.random()))).hexdigest()[:5]
+    password = force_bytes(hashlib.sha1(force_bytes(salt + settings.SECRET_KEY)).hexdigest())
 
     kdf = PBKDF2HMAC(
         algorithm=hashes.SHA256(),
         length=32,
-        salt=bytes(salt),
+        salt=force_bytes(salt),
         iterations=100000,
         backend=default_backend()
     )
     key = base64.urlsafe_b64encode(kdf.derive(password))
     f = Fernet(key)
-    token = f.encrypt(bytes(string))
+    token = f.encrypt(force_bytes(string))
     result = salt + "$" + token
 
     return result
@@ -96,18 +97,18 @@ def encrypt_data(string):
 
 def decrypt_data(string):
     salt, data = string.split('$')
-    password = bytes(hashlib.sha1(salt + settings.SECRET_KEY).hexdigest())
+    password = force_bytes(hashlib.sha1(force_bytes(salt + settings.SECRET_KEY)).hexdigest())    
 
     kdf = PBKDF2HMAC(
         algorithm=hashes.SHA256(),
         length=32,
-        salt=bytes(salt),
+        salt=force_bytes(salt),
         iterations=100000,
         backend=default_backend()
     )
     key = base64.urlsafe_b64encode(kdf.derive(password))
     f = Fernet(key)
-    result = f.decrypt(bytes(data))
+    result = f.decrypt(force_bytes(data))
 
     return result
 
