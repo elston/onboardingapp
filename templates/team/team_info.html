@@ -109,25 +109,19 @@
             <div style="margin-top: 30px;"></div>
             <div id="" class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        {% regroup error_log by user as error_list %}
-                        <h4>Error Log</h4>
-                        <ul>
-                            {% for user in error_list %}
-                            <li>{{ user.grouper }}
-                                <ul style="line-height: 1.5">
-                                    {% for item in user.list %}
-                                        <form action="{% url 'remove_error_log' item.id %}" method="post">
-                                        {% csrf_token %}
-                                            <button type="submit" style="color: red; opacity: 1;" class="close"><span aria-hidden="true">&times;</span></button>
-                                        </form>
-                                        <li>{{ item.service }}: {{ item.text }}</li>
-                                    {% endfor %}
-                                </ul>
-                            </li>
-                            {% endfor %}
-                        </ul>
+                    <div id="errlog-title"  class="col-lg-12">
+                        <h4>Error Log</h5>
                     </div>
+                    {% for item in error_log %}
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 members-box">
+                        <form action="{% url 'remove_error_log' item.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="close"><span aria-hidden="true" class="fa fa-trash">
+                            </span></button>
+                        </form>
+                        <b>{{item.timestamp}}</b>, Removing  Team Member <b>"Elston"</b> from service <b>"Slack"</b> completed with failure
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
         {% endif %}
