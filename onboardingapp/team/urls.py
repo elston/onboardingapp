@@ -13,13 +13,13 @@ urlpatterns = [
         views.TeamsList.as_view(), 
             name='teams_list'),
 
-    url(r'^team/limit/check$',
-        views.check_team_limit, 
-            name='check_team_limit'),
-
     url(r'^team/(?P<id>\d+)$', 
         views.team_info, 
             name='team_info'),
+
+    url(r'^team/limit/check$',
+        views.check_team_limit, 
+            name='check_team_limit'),
 
     url(r'^team/(?P<team_id>\d+)/delete$', 
         views.delete_team, 

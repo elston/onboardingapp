@@ -37,28 +37,117 @@ class TeamUserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username','email', 'is_active', 'password1', 'password2')}
-        ),
+            'fields': (
+                'username',
+                'email', 
+                'is_active', 
+                'password1', 
+                'password2'
+            )
+        }),
     )
 
     # ..
     filter_horizontal = ()    
 
     # ...
-    list_display = ('id','username','email', 'is_active', 'is_superuser','account')
-    list_display_links = ('username',)    
-    list_filter = ('is_superuser','is_active')    
-    search_fields = ('email','username')
-    ordering = ('id',)
+    list_display = (
+        'id',
+        'username',
+        'email', 
+        'is_active', 
+        'is_superuser',
+        'account',
+        'customer_id',
+        'subscription_id',
+    )
+    list_display_links = (
+        'username',
+    )    
+    list_filter = (
+        'is_superuser',
+        'is_active',
+    )    
+    search_fields = (
+        'email',
+        'username',
+    )
+    ordering = (
+        'id',
+    )
 
 admin.site.register(TeamUser, TeamUserAdmin)
 
 class TeamAdmin(admin.ModelAdmin):
-    list_display = ('pk','name','owner',)
-    list_display_links = ('name',)
-    filter_horizontal = ('admin','member','service','invited')        
+    list_display = (
+        'pk',
+        'name',
+        'owner',
+    )
+    list_display_links = (
+        'name',
+    )
+    filter_horizontal = (
+        'admin',
+        'member',
+        'service',
+        'invited',
+    )        
 admin.site.register(Team,TeamAdmin)
 
-# admin.site.register(TeamUser)
-admin.site.register(Service)
-admin.site.register(Account)
+class ServiceAdmin(admin.ModelAdmin):
+    list_display = (
+        'pk',
+        'name',
+        'org_name',
+        'team_name',
+        'is_active',
+    )
+    list_display_links = (
+        'name',
+    )    
+admin.site.register(Service,ServiceAdmin)
+
+class AccountAdmin(admin.ModelAdmin):
+    list_display = (
+        'pk',
+        'name',
+        'org_limit',
+        'team_limit',
+        'budget',
+        'description',
+        'stripe_id',
+    )
+    list_display_links = (
+        'name',
+    )    
+admin.site.register(Account,AccountAdmin)
+
+
+class ErrorLogAdmin(admin.ModelAdmin):
+    list_display = (
+        'pk',
+        'timestamp',
+        'user',
+        'team',
+        'service',
+    )
+    list_display_links = (
+        'timestamp',
+    )    
+admin.site.register(ErrorLog,ErrorLogAdmin)
+
+
+class AdditionalInfoAdmin(admin.ModelAdmin):
+    list_display = (
+        'pk',
+        'user',
+        'team',
+        'service',
+        'data',
+    )
+    list_display_links = (
+        'user',
+        'team',
+    )    
+admin.site.register(AdditionalInfo,AdditionalInfoAdmin)

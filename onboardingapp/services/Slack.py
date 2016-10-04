@@ -11,6 +11,10 @@ from .common import check_service_instance, encrypt_data, decrypt_data
 
 
 class Slack:
+    
+    def login_url(self):
+        return 'https://slack.com/signin'
+
     def get_form(self):
         return SlackForm(initial={'name': 'Slack'})
 
@@ -35,7 +39,6 @@ class Slack:
                     service = self.create(form, s_name, org_name,
                                           team_name, team_id)
                     team.service.add(service)
-                    team.save()
 
                     self.add_member_group(team, service)
 
@@ -156,7 +159,6 @@ class Slack:
 
         if res.status_code == requests.codes.ok:
             res_json = res.json()
-            print(res_json)
             for item in res_json['members']:
                 try:
                     email = item['profile']['email']

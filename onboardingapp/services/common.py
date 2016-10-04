@@ -2,7 +2,7 @@ import base64
 import hashlib
 import random
 from django.conf import settings
-from django.utils.encoding import force_bytes
+from django.utils.encoding import force_bytes,force_text
 
 from cryptography.fernet import Fernet
 from cryptography.hazmat.backends import default_backend
@@ -90,7 +90,7 @@ def encrypt_data(string):
     key = base64.urlsafe_b64encode(kdf.derive(password))
     f = Fernet(key)
     token = f.encrypt(force_bytes(string))
-    result = salt + "$" + token
+    result = salt + "$" + force_text(token)
 
     return result
 
@@ -108,7 +108,7 @@ def decrypt_data(string):
     )
     key = base64.urlsafe_b64encode(kdf.derive(password))
     f = Fernet(key)
-    result = f.decrypt(force_bytes(data))
+    result = force_text(f.decrypt(force_bytes(data)))
 
     return result
 
