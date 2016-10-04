@@ -24,7 +24,20 @@ function fadein(id)
 
 
 // Open the lightbox 
+function open_team_editbox(formtitle, fadin) {
+  var box = document.getElementById('team_editbox'); 
+  document.getElementById('shadowing').style.display='block';
 
+  var btitle = document.getElementById('lightbox_content_heading');
+  btitle.innerHTML = formtitle;
+  
+  if(fadin){
+    gradient("box", 0);
+    fadein("box");
+  }else{   
+    box.style.display='block';
+  }   
+};
 
 function openbox(formtitle, fadin)
 {
@@ -122,5 +135,9 @@ function closebox22()
    document.getElementById('shadowing22').style.display='none';
 }
 
-
+function close_team_edtbox()
+{
+   document.getElementById('team_editbox').style.display='none';
+   document.getElementById('shadowing').style.display='none';
+}
 

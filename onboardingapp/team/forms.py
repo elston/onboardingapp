@@ -67,6 +67,17 @@ class UserInviteForm(forms.Form):
     #     label='Admin', required=False
     # )
 
+ 
+class TeamEditForm(forms.Form):
+    team = forms.CharField(widget=forms.HiddenInput())
+    name = forms.CharField(
+        widget=forms.TextInput(attrs={'placeholder': 'Team name'}),
+        required=True
+    ) 
+    description = forms.CharField(
+        widget=forms.TextInput(attrs={'placeholder': 'Team description'}),
+        required=False
+    )     
 
 class CreateTeamForm1(forms.Form):
     organization = forms.ModelChoiceField(

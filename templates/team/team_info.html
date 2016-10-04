@@ -11,6 +11,8 @@
 
         <div id="" class="row">
             {% if user == team.owner %}
+                <a href="#" onclick="open_team_editbox('', 0)">Edit this team</a>  
+                &nbsp;|&nbsp;  
                 <a href="/team/{{team.id}}/delete"> Delete this team </a>
             {% endif %}
         </div>
@@ -110,7 +112,7 @@
             <div id="" class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div id="errlog-title"  class="col-lg-12">
-                        <h4>Error Log</h5>
+                        <h4>Log</h5>
                     </div>
                     {% for item in error_log %}
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 members-box">
@@ -127,6 +129,35 @@
         {% endif %}
 
     </div>
+
+    <div id="shadowing"></div>
+    <div id="team_editbox" class="panel panel-primary">
+        <div id="boxtitle">
+            <p id="lightbox_content_heading"></p>
+            <div class="panel-heading text-center">
+            <h1 class="panel-title text-center" style="float:left">Edit Team</h1>
+                <div style="float:right" id="close" onclick="close_team_edtbox()" ><i class="menu_btn fa fa-times"></i></div>
+            </div>
+        </div>
+
+        <div>
+            <form id="team-edit-form" method="post" onsubmit="save_team(); return false;">
+                {% csrf_token %}
+                <div class="col-lg-12 col-md-12 col-sm-12 grey-popup">
+                    {% for item in teamedit_form %}
+                        <div class="form-group">
+                            {{ item }}
+                        </div>
+                    {% endfor %}
+                    <div class="form-group">
+                        <input class="acc-btns" type="submit" value="Save">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
 
     <div id="shadowing"></div>
     <div id="box" class="panel panel-primary">

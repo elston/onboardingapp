@@ -37,7 +37,12 @@ from .models import (
 )
 from .common import check_emails_list_for_team_members
 from .common import send_email_message
-from .forms import UserInviteForm, CreateTeamForm1, CreateTeamForm2
+from .forms import (
+    UserInviteForm, 
+    CreateTeamForm1, 
+    CreateTeamForm2, 
+    TeamEditForm
+)
 
 
 class TeamsList(ListView):
@@ -181,6 +186,7 @@ def team_info(request, id):
     organization = Organization.objects.get(team=team)
 
     form = UserInviteForm(initial={'team': team.pk})
+    teamedit_form = TeamEditForm(initial={'team': team.pk})
 
     context = {
         'team': team,
@@ -192,6 +198,7 @@ def team_info(request, id):
         'other_services': other_services,
         'organization': organization,
         'invite_form': form,
+        'teamedit_form':teamedit_form,
     }
 
     return render(request, template_name, context)
