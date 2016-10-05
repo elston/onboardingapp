@@ -25,6 +25,10 @@ urlpatterns = [
         views.edit_team, 
             name='edit_team'),
 
+    url(r'^team/changeteamowner$', 
+        views.changeteamowner_team, 
+            name='changeteamowner_team'),    
+
     url(r'^team/limit/check$',
         views.check_team_limit, 
             name='check_team_limit'),

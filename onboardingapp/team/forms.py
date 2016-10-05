@@ -121,3 +121,18 @@ class CreateTeamForm2(forms.Form):
             attrs={'class': 'styled', 'checked': True, 'id': 'id_is_member'}),
         label='Add to the team as a member', required=False
     )    
+
+
+class ChangeTeamOwnerForm(forms.Form):
+    team = forms.CharField(widget=forms.HiddenInput())    
+    owner = forms.ModelChoiceField(
+        queryset=TeamUser.objects.all(),
+        required=True, empty_label=None)
+
+    def __init__(self, *args, **kwargs):
+        team = kwargs.pop('team', None)
+        super(ChangeTeamOwnerForm, self).__init__(*args, **kwargs)
+
+        if team:
+            self.fields['owner'].queryset = team.member.exclude(
+                id=team.owner.id)

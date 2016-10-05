@@ -41,7 +41,8 @@ from .forms import (
     UserInviteForm, 
     CreateTeamForm1, 
     CreateTeamForm2, 
-    TeamEditForm
+    TeamEditForm,
+    ChangeTeamOwnerForm    
 )
 
 
@@ -199,6 +200,11 @@ def team_info(request, id):
         'description': team.description,        
     })
 
+    changeteamowner_form = ChangeTeamOwnerForm(
+        team=team,
+        initial={'team': team.pk}        
+    )
+
     context = {
         'team': team,
         'members': members,
@@ -210,6 +216,7 @@ def team_info(request, id):
         'organization': organization,
         'invite_form': form,
         'teamedit_form':teamedit_form,
+        'changeteamowner_form':changeteamowner_form,
     }
 
     return render(request, template_name, context)
@@ -644,6 +651,42 @@ def edit_team(request):
             response[k] = form.errors[k][0]
 
         return JsonResponse({'response': response}, status=400)
+
+
+@login_required
+@require_http_methods(["POST"])
+@csrf_exempt
+def changeteamowner_team(request):
+    # ...
+    print(request.POST)
+    form = ChangeTeamOwnerForm(request.POST)
+    if form.is_valid():
+        # ...
+        owner = form.cleaned_data['owner']
+        team_id = form.cleaned_data['team']
+        team  = Team.objects.get(id=team_id)
+        # ...
+        email_body = """
+        You've got an invitation to join Team: <b>%s</b> <br />
+        You can use all services from the team once you accept the invitation at the following link <br /><br />
+        http://www.allstacks.com/team/%i/member/%i/changeteamowner <br /> <br />
+        Thank you, <br />
+        Allstacks team
+        """ % (team.name, team.id, owner.id)
+        print(email_body)        
+        # ...
+        messages.success(request, 
+            'The team member {} was invited to'
+            ' become the owner successfully'.format(owner.username)
+        )
+        return JsonResponse({'ok':0}, status=200)
+
+    else:
+        response = {}
+        for k in form.errors:
+            response[k] = form.errors[k][0]
+
+        return JsonResponse({'response': response}, status=400)        
 
 
 
