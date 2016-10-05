@@ -141,7 +141,7 @@
         </div>
 
         <div>
-            <form id="team-edit-form" method="post" onsubmit="save_team(); return false;">
+            <form id="team-edit-form" method="post" onsubmit="save_team_edtbox(); return false;">
                 {% csrf_token %}
                 <div class="col-lg-12 col-md-12 col-sm-12 grey-popup">
                     {% for item in teamedit_form %}

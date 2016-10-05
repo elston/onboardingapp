@@ -76,6 +76,35 @@ function invite_team_member(email, team_id)
     return false;
 }
 
+function save_team_edtbox(){
+    // ...
+    var frm = $("#team-edit-form");
+    $("#team-edit-form").find('.error').remove();
+    var data = frm.serialize();
+    // ..
+    $.ajax({
+        type: "post",
+        url: "/team/edit",
+        data: data,
+        success: function (result) {
+            location.reload();
+        },
+        error: function (data, status) {
+            if (data.status == 400) {
+                var json = JSON.parse(data.responseText);
+                var errors = json['response'];
+
+                for (var k in errors) {
+                    $("#team-edit-form").find('input[name=' + k + ']').before('<div class="error" style="color: red;">' + errors[k] + '</div>');
+                }
+            } else {
+                location.reload();
+            }
+        },
+    });
+    return false;
+}
+
 function remove_chlen(chlen,m_id, t_id){
     var r = confirm("Are you sure to remove this "+chlen+"?");
     if (r == true) {

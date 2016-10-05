@@ -186,7 +186,11 @@ def team_info(request, id):
     organization = Organization.objects.get(team=team)
 
     form = UserInviteForm(initial={'team': team.pk})
-    teamedit_form = TeamEditForm(initial={'team': team.pk})
+    teamedit_form = TeamEditForm(initial={
+        'team': team.pk,
+        'name': team.name,
+        'description': team.description,        
+    })
 
     context = {
         'team': team,
@@ -600,6 +604,41 @@ def create_team(request):
             response[k] = form.errors[k][0]
 
         return JsonResponse({'response': response}, status=400)
+
+
+@login_required
+@require_http_methods(["POST"])
+@csrf_exempt
+def edit_team(request):
+    # ...
+    form = TeamEditForm(request.POST)
+    if form.is_valid():
+        # ...
+        team_id = form.cleaned_data['team']
+        team  = Team.objects.get(id=team_id)
+        # ..
+        if team.owner != request.user:
+            messages.error(request, 'You don\'t have permission')
+            return JsonResponse({}, status=403)
+
+        team.name = form.cleaned_data['name']
+        team.description = form.cleaned_data['description']
+        team.save()
+
+        # ...
+        messages.success(request, 'The team {} was edit successfully'.format(team.name))
+        # data = {'href': '/team/' + str(team.id)}
+        data = {'ok':0}
+        return JsonResponse(data, status=200)
+
+    else:
+        response = {}
+        for k in form.errors:
+            response[k] = form.errors[k][0]
+
+        return JsonResponse({'response': response}, status=400)
+
+
 
 
 @login_required

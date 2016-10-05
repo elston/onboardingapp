@@ -17,6 +17,14 @@ urlpatterns = [
         views.team_info, 
             name='team_info'),
 
+    url(r'^team/create$', 
+        views.create_team, 
+            name='create_team'),
+
+    url(r'^team/edit$', 
+        views.edit_team, 
+            name='edit_team'),
+
     url(r'^team/limit/check$',
         views.check_team_limit, 
             name='check_team_limit'),
@@ -41,9 +49,7 @@ urlpatterns = [
         views.add_additional_info, 
             name='add_additional_info'),
 
-    url(r'^team/create$', 
-        views.create_team, 
-            name='create_team'),
+
 
     url(r'^team/member/remove$', 
         views.remove_member, 
