@@ -137,9 +137,16 @@ def dashboard(request):
         unique_members = list(unique_members_set)
         result[service] = len(unique_members)
 
+    orgs = Organization.objects.filter(owner=request.user).exists()
+    if orgs:
+        form = CreateTeamForm1(request.POST)
+    else:
+        form = CreateTeamForm2(request.POST)
+
     context = {
         'teams': teams,
-        'services_list': result
+        'services_list': result,
+        'form':form,
     }
     return render(request, template_name, context)
 
