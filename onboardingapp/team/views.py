@@ -667,17 +667,26 @@ def changeteamowner_team(request):
         team  = Team.objects.get(id=team_id)
         # ...
         email_body = """
-        You've got an invitation to join Team: <b>%s</b> <br />
-        You can use all services from the team once you accept the invitation at the following link <br /><br />
-        http://www.allstacks.com/team/%i/member/%i/changeteamowner <br /> <br />
+        You've got an invitation to become team owner for team <b>%s</b> <br />
+        You can to become team owner once you accept the invitation at the following link <br /><br />
+        http://www.allstacks.com/team/%i/member/%i/accept-changeteamowner <br /> <br />
         Thank you, <br />
         Allstacks team
         """ % (team.name, team.id, owner.id)
-        print(email_body)        
         # ...
+        header_string = 'Dear {},'.format(owner.email)        
+        if len(owner.first_name) > 0:
+            header_string = 'Dear {},'.format(owner.first_name)
+           
+        # ....
+        send_email_message(email_body, header_string, 
+            'Allstacks Team changes for {}'.format(team.name), 
+            owner.email
+        )        
+        # ..
         messages.success(request, 
             'The team member {} was invited to'
-            ' become the owner successfully'.format(owner.username)
+            ' become the team owner successfully'.format(owner.username)
         )
         return JsonResponse({'ok':0}, status=200)
 
@@ -688,7 +697,30 @@ def changeteamowner_team(request):
 
         return JsonResponse({'response': response}, status=400)        
 
+@login_required
+def accept_changeteamowner(request, t_id, m_id):
+    teamuser = get_object_or_404(TeamUser, id=m_id)
 
+    if teamuser != request.user:
+        messages.error(request, 'You don\'t have permission')
+        url = request.path
+        logout(request)
+        return redirect(reverse_lazy('account_login'), kwargs={'next': url})
+
+    team = Team.objects.get(id=t_id)
+    if team:
+        # ...
+        team.owner = teamuser
+        team.save()
+        # ..
+        context = {
+            'team': team
+        }
+        return render(request, 'user/accept_changeteamowner.html', context)
+    else:
+        err = 'You are not a member of this team or team doesn\'t exist!'
+        messages.error(request, err)
+        return redirect(reverse_lazy('dashboard'))        
 
 
 @login_required

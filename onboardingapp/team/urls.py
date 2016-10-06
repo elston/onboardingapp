@@ -28,6 +28,9 @@ urlpatterns = [
     url(r'^team/changeteamowner$', 
         views.changeteamowner_team, 
             name='changeteamowner_team'),    
+    url(r'^team/(?P<t_id>\d+)/member/(?P<m_id>\d+)/accept-changeteamowner$',
+        views.accept_changeteamowner, 
+            name='accept_changeteamowner'),    
 
     url(r'^team/limit/check$',
         views.check_team_limit, 
