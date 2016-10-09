@@ -8,28 +8,25 @@ Gap Document for Allstacks:
 
 COMPLETED
 ==================
-1. Team Owner Membership:
+##### 1. Team Owner Membership:
 When a team is created, the team owner is asked if they need to be added to the team as a member [with a checkbox], if so, they are added to the team, and should show up in the members list.
 
-
-2. Team Invitation status:
+##### 2. Team Invitation status:
 A teamuser should be placed in invitation status until they reach the team_invitation_step2 endpoint.  Until then, they are marked as invited, but not added.
 
-
-3. Service links:
+##### 3. Service links:
 All service icons should be clickable, open in a new tab, and should take the user to the logon page for the service.
 
-
-4. Team Ownership transfer:
+##### 4. Team Ownership transfer:
 A team owner should be able to transfer ownership to another teamuser.  This action must be confirmed.
 
-5. Empty Account Dashboard:
+##### 5. Empty Account Dashboard:
 If the user has no teams, they should be instructed to create a team, and provided with a link.  
 
-6. Team Dashboard Creation link:
+##### 6. Team Dashboard Creation link:
 The team dashboard, and the regular dashboard should have a link to create a new team.
 
-7. Team Information edit:
+##### 7. Team Information edit:
 The team should have editable information: Description and Team Name.
 
 NOT COMPLETED
