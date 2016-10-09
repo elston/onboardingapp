@@ -124,7 +124,10 @@ class CreateTeamForm2(forms.Form):
 
 
 class ChangeTeamOwnerForm(forms.Form):
-    team = forms.CharField(widget=forms.HiddenInput())    
+
+    team = forms.CharField(
+        widget=forms.HiddenInput())    
+
     owner = forms.ModelChoiceField(
         queryset=TeamUser.objects.all(),
         required=True, empty_label=None)

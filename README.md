@@ -2,9 +2,6 @@ www.allstocks.com
 
 python3 sqlite bootstrap
 
-TZ
-
-Gap Document for Allstacks:
 
 COMPLETED
 ==================
