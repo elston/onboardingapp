@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=255)),
                 ('description', models.TextField(blank=True)),
                 ('owner', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-                ('team', models.ManyToManyField(blank=True, related_name='organization_team', to='team.Team')),
+                ('team', models.ManyToManyField(blank=True, related_name='organizations', to='team.Team')),
             ],
         ),
     ]

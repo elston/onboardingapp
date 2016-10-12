@@ -79,7 +79,7 @@ class TeamEditForm(forms.Form):
         required=False
     )     
 
-class CreateTeamForm1(forms.Form):
+class CreateTeamForm(forms.Form):
     organization = forms.ModelChoiceField(
         queryset=Organization.objects.all(),
         required=True, empty_label=None)
@@ -98,14 +98,15 @@ class CreateTeamForm1(forms.Form):
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)
-        super(CreateTeamForm1, self).__init__(*args, **kwargs)
+        super(CreateTeamForm, self).__init__(*args, **kwargs)
 
+        print(user)
         if user:
             self.fields['organization'].queryset = Organization.objects.filter(
                 owner=user)
 
 
-class CreateTeamForm2(forms.Form):
+class CreateTeamAndOrgForm(forms.Form):
     organization = forms.CharField(
         widget=forms.TextInput(
             attrs={'required': True, 'placeholder': 'Company or orginization name'}))

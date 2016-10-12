@@ -80,14 +80,14 @@ class Team(models.Model):
     """
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=1024)
-    owner = models.ForeignKey(TeamUser, related_name="owner")
-    admin = models.ManyToManyField(TeamUser, related_name="admin")
+    owner = models.ForeignKey(TeamUser, related_name="ownerteams")
+    admin = models.ManyToManyField(TeamUser, related_name="adminteams")
     member = models.ManyToManyField(
-        TeamUser, related_name='team_member', blank=True)
+        TeamUser, related_name='memberteams', blank=True)
     invited = models.ManyToManyField(
-        TeamUser, related_name='team_invited', blank=True)
+        TeamUser, related_name='invitedteams', blank=True)
     service = models.ManyToManyField(
-        Service, related_name='team_service', blank=True)
+        Service, related_name='teams', blank=True)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
@@ -96,9 +96,9 @@ class Team(models.Model):
 
 class ErrorLog(models.Model):
     timestamp = models.DateTimeField(default=datetime.datetime.now)
-    user = models.ForeignKey(TeamUser, related_name='teamuser')
-    team = models.ForeignKey(Team, related_name='team')
-    service = models.ForeignKey(Service, related_name='service')
+    user = models.ForeignKey(TeamUser, related_name='errorlogs')
+    team = models.ForeignKey(Team, related_name='errorlogs')
+    service = models.ForeignKey(Service, related_name='errorlogs')
     text = models.TextField()
 
     class Meta:
@@ -109,9 +109,9 @@ class ErrorLog(models.Model):
 
 
 class AdditionalInfo(models.Model):
-    user = models.ForeignKey(TeamUser, related_name='teamuser_info')
-    team = models.ForeignKey(Team, related_name='team_info')
-    service = models.ForeignKey(Service, related_name='service_info')
+    user = models.ForeignKey(TeamUser, related_name='additionalinfos')
+    team = models.ForeignKey(Team, related_name='additionalinfos')
+    service = models.ForeignKey(Service, related_name='additionalinfos')
     data = models.CharField(max_length=255, blank=True)
 
     def __str__(self):

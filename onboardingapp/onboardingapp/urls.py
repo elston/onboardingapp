@@ -7,7 +7,8 @@ urlpatterns = [
     url(r"^$", Homeview.as_view()),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('allauth.urls')),    
-    url(r'^organization/', include('organization.urls')),    
+    url(r'^dashboard/', include('dashboard.urls','dashboard')),    
+    url(r'^organization/', include('organization.urls')),
 ]
 
 from team.urls import urlpatterns as team_urlpatterns

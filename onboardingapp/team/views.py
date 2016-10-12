@@ -30,7 +30,7 @@ from organization.models import Organization
 
 import services
 from services import *
-from services.common import check_service_teamuser, check_services
+from services.common import check_service_teamuser
 
 from .models import (
     Service, Team, TeamUser, Account, AdditionalInfo, ErrorLog
@@ -39,58 +39,63 @@ from .common import check_emails_list_for_team_members
 from .common import send_email_message
 from .forms import (
     UserInviteForm, 
-    CreateTeamForm1, 
-    CreateTeamForm2, 
+    CreateTeamForm, 
+    CreateTeamAndOrgForm, 
     TeamEditForm,
     ChangeTeamOwnerForm    
 )
 
 
-class TeamsList(ListView):
+class Teams(ListView):
     template_name = 'team/teams.html'
     context_object_name = 'teams'
 
     def get_context_data(self, **kwargs):
-        context = super(TeamsList, self).get_context_data(**kwargs)
+        context = super(Teams, self).get_context_data(**kwargs)
 
         orgs = Organization.objects.filter(owner=self.request.user)
         context['orgs'] = orgs
 
         if orgs:
-            context['form'] = CreateTeamForm1(user=self.request.user)
+            context['form'] = CreateTeamForm(user=self.request.user)
         else:
-            context['form'] = CreateTeamForm2()
+            context['form'] = CreateTeamAndOrgForm()
 
-        filter = self.request.GET.get('filter', None)
-        if filter:
-            context['filter'] = int(filter)
-            if int(filter) > 0:
-                org = get_object_or_404(Organization, id=int(filter))
+        team_filter = self.request.GET.get('filter', None)
+        if team_filter:
+            context['filter'] = int(team_filter)
+            if int(team_filter) > 0:
+                org = get_object_or_404(Organization, id=int(team_filter))
                 context['organization'] = org
 
         return context
 
     def get_queryset(self):
-        filter = int(self.request.GET.get('filter', -1))
+        team_filter = int(self.request.GET.get('filter', -1))
         org = None
 
-        if filter == -1:
+        if team_filter == -1:
+            return Team.objects\
+                .filter(
+                    Q(owner=self.request.user) | Q(member=self.request.user))\
+                .distinct()
+
+        if team_filter > 0:
+            org = get_object_or_404(Organization, id=team_filter)
             return Team.objects.filter(
-                Q(owner=self.request.user) | Q(member=self.request.user)).distinct()
+                organizations=org)
 
-        if filter > 0:
-            org = get_object_or_404(Organization, id=filter)
-            return Team.objects.filter(organization_team=org)
+        if team_filter == -2:
+            return Team.objects.filter(
+                owner=self.request.user)
 
-        if filter == -2:
-            return Team.objects.filter(owner=self.request.user)
-
-        if filter == -3:
-            return Team.objects.filter(member=self.request.user)
+        if team_filter == -3:
+            return Team.objects.filter(
+                member=self.request.user)
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
-        return super(TeamsList, self).dispatch(request, *args, **kwargs)
+        return super(Teams, self).dispatch(request, *args, **kwargs)
 
 
 @receiver(user_signed_up)
@@ -107,49 +112,6 @@ def check_registration(request):
 
     return redirect(reverse_lazy('dashboard'))
 
-
-@login_required
-def dashboard(request):
-    template_name = 'dashboard.html'
-    teamowner = request.user
-    teams = Team.objects.filter(owner=teamowner)
-    services_list = []
-    data = {}
-
-    for team in teams:
-        services = Service.objects.filter(team_service=team)
-        members = team.member.all()
-        services_list.extend(services)
-
-        for service in services:
-            data[service.id] = list(members)
-
-    for service in services_list:
-        for item in services_list:
-            if check_services(service, item) and (service.id != item.id):
-                data[service.id].extend(data[item.id])
-                services_list.remove(item)
-                del data[item.id]
-
-    result = {}
-    for key, item in data.items():
-        service = get_object_or_404(Service, id=key)
-        unique_members_set = set(item)
-        unique_members = list(unique_members_set)
-        result[service] = len(unique_members)
-
-    orgs = Organization.objects.filter(owner=request.user).exists()
-    if orgs:
-        form = CreateTeamForm1(request.POST)
-    else:
-        form = CreateTeamForm2(request.POST)
-
-    context = {
-        'teams': teams,
-        'services_list': result,
-        'form':form,
-    }
-    return render(request, template_name, context)
 
 
 @login_required
@@ -579,9 +541,9 @@ def create_team(request):
     orgs = Organization.objects.filter(owner=request.user).exists()
 
     if orgs:
-        form = CreateTeamForm1(request.POST)
+        form = CreateTeamForm(request.POST)
     else:
-        form = CreateTeamForm2(request.POST)
+        form = CreateTeamAndOrgForm(request.POST)
 
     if form.is_valid():
         org = form.cleaned_data['organization']

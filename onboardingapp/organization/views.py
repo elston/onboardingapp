@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.db.models import Q
 from .models import Organization
 from .forms import OrganizationCreateForm
-from team.forms import CreateTeamForm1
+from team.forms import CreateTeamForm
 
 
 class OrganizationDetail(DetailView):
@@ -25,7 +25,7 @@ class OrganizationDetail(DetailView):
         teams = obj.team.all()
         context['teams'] = teams
 
-        team_form = CreateTeamForm1(user=self.request.user)
+        team_form = CreateTeamForm(user=self.request.user)
         context['form'] = team_form
 
         return context
@@ -46,24 +46,25 @@ class OrganizationList(FormView, ListView):
         context = super(OrganizationList, self).get_context_data(**kwargs)
         context['form'] = self.get_form()
 
-        filter = self.request.GET.get('filter', None)
-        if filter:
-            context['filter'] = int(filter)
+        org_filter = self.request.GET.get('filter', None)
+        if org_filter:
+            context['filter'] = int(org_filter)
 
         return context
 
     def get_queryset(self):
-        filter = int(self.request.GET.get('filter', -1))
+        org_filter = int(self.request.GET.get('filter', -1))
 
-        if filter == -1:
+        if org_filter == -1:
             return set(Organization.objects.filter(
                 Q(owner=self.request.user) | Q(team__member=self.request.user)
             ))
 
-        if filter == -2:
-            return Organization.objects.filter(owner=self.request.user)
+        if org_filter == -2:
+            return Organization.objects.filter(
+                owner=self.request.user)
 
-        if filter == -3:
+        if org_filter == -3:
             return set(Organization.objects.filter(
                 team__member=self.request.user))
 
@@ -98,7 +99,7 @@ class OrganizationList(FormView, ListView):
 @require_http_methods(["POST"])
 @csrf_exempt
 def check_organization_limit(request):
-    orgs = request.user.organization_owner.all()
+    orgs = request.user.organizations.all()
 
     if orgs:
         if request.user.account:

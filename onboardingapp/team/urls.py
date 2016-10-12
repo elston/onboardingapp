@@ -4,17 +4,11 @@ from team import views
 
 urlpatterns = [
 
-    # DASHBOARD
-    # ...
-    url(r'^dashboard$', 
-        views.dashboard, 
-        name='dashboard'),
-
     # TEAM
     # ...list
     url(r'^teams', 
-        views.TeamsList.as_view(), 
-            name='teams_list'),
+        views.Teams.as_view(), 
+            name='teams'),
 
     # ...read
     url(r'^team/(?P<id>\d+)$', 
@@ -159,3 +153,12 @@ urlpatterns = [
         views.remove_error_log, 
             name='remove_error_log'),
 ]
+
+
+# from .router import router
+# api = router.api
+# # ...
+# urlpatterns = urlpatterns + [
+#     url(r'^team/api/$', api, name='team_api'),               
+#     url(r'^team/router/$', router, name='team_router'),    
+# ]

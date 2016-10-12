@@ -1,0 +1,8 @@
+@media only screen and (max-width: 768px) {
+    #create-team-form_box{
+        width: 94% !important;
+        left: 3% !important;
+    }
+}
+
+

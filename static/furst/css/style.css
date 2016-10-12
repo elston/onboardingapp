@@ -200,11 +200,6 @@ hr.small {
         margin-bottom: 20px;
     }
 
-    #box{
-        width: 94% !important;
-        left: 3% !important;
-    }
-
     .grey-popup, .grey-popup2, .grey-popup3{
         padding: 15px !important;
     }
@@ -761,21 +756,7 @@ footer .copyright {
     font-family: oswald-reg;
 }
 
-#box .panel-title{
-    margin-top: 0;
-    margin-bottom: 0;
-    font-size: 22px !important;
-    text-transform: uppercase;
-    display: inline;
-    float: none !important;
-}
-#box .panel-heading{
-    height: 100%;
-    padding: 15px 15px;
-}
-#box .panel-heading #close{
-    font-size: 22px;
-}
+
 #box2 .panel-title{
     margin-top: 0;
     margin-bottom: 0;
