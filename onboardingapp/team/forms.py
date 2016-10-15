@@ -4,6 +4,8 @@ from .models import TeamUser
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.utils.translation import ugettext, ugettext_lazy as _
 
+from .validators import ValidationFormMixin
+
 class UserCreationForm(forms.ModelForm):
     # ...
     password1 = forms.CharField(label='Password', 
@@ -79,13 +81,16 @@ class TeamEditForm(forms.Form):
         required=False
     )     
 
-class CreateTeamForm(forms.Form):
+class CreateTeamForm(forms.Form,ValidationFormMixin):
+
     organization = forms.ModelChoiceField(
         queryset=Organization.objects.all(),
         required=True, empty_label=None)
+
     team_name = forms.CharField(
         widget=forms.TextInput(
             attrs={'required': True, 'placeholder': 'Team Name'}))
+
     team_description = forms.CharField(
         widget=forms.TextInput(
             attrs={'required': True, 'placeholder': 'Team Description'}))
@@ -100,19 +105,25 @@ class CreateTeamForm(forms.Form):
         user = kwargs.pop('user', None)
         super(CreateTeamForm, self).__init__(*args, **kwargs)
 
-        print(user)
         if user:
             self.fields['organization'].queryset = Organization.objects.filter(
                 owner=user)
 
 
-class CreateTeamAndOrgForm(forms.Form):
+class CreateTeamAndOrgForm(forms.Form,ValidationFormMixin):
+
+    whith_org = forms.BooleanField(
+        widget=forms.HiddenInput(),
+        initial=True)
+
     organization = forms.CharField(
         widget=forms.TextInput(
             attrs={'required': True, 'placeholder': 'Company or orginization name'}))
+
     team_name = forms.CharField(
         widget=forms.TextInput(
             attrs={'required': True, 'placeholder': 'Team Name'}))
+
     team_description = forms.CharField(
         widget=forms.TextInput(
             attrs={'required': True, 'placeholder': 'Team Description'}))
@@ -120,8 +131,8 @@ class CreateTeamAndOrgForm(forms.Form):
     is_member = forms.BooleanField(
         widget=forms.CheckboxInput(
             attrs={'class': 'styled', 'checked': True, 'id': 'id_is_member'}),
-        label='Add to the team as a member', required=False
-    )    
+        label='Add to the team as a member', 
+        required=False)    
 
 
 class ChangeTeamOwnerForm(forms.Form):

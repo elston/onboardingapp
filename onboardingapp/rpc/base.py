@@ -9,6 +9,10 @@ from django.utils.datastructures import MultiValueDict
 
 from django.utils import encoding
 
+from django.core.exceptions import ValidationError
+
+from exceptions import codes
+
 class RpcRouterJSONEncoder(json.JSONEncoder):
     """
     JSON Encoder for RpcRouter
@@ -137,18 +141,26 @@ class RpcRouter(object):
         response = HttpResponse('', content_type="application/json")
             
         output = []
-        
-        for rd in requests:
-            mr = self.call_action(rd, request, *args, **kwargs)
-            
-            #This looks like a little ugly
-            if 'result' in mr and isinstance(mr['result'], RpcHttpResponse):
-                for key, val in mr['result'].cookies.items():
-                    response.set_cookie(key, val.value, val['max-age'], val['expires'], val['path'],
-                                        val['domain'], val['secure'])
-                mr['result'] = dict(mr['result'])
+        try:    
+            for rd in requests:
+                mr = self.call_action(rd, request, *args, **kwargs)
                 
-            output.append(mr)
+                #This looks like a little ugly
+                if 'result' in mr and isinstance(mr['result'], RpcHttpResponse):
+                    for key, val in mr['result'].cookies.items():
+                        response.set_cookie(key, val.value, val['max-age'], val['expires'], val['path'],
+                                            val['domain'], val['secure'])
+                    mr['result'] = dict(mr['result'])
+                    
+                output.append(mr)
+
+        except ValidationError as e:
+            response.status_code = codes.get(e.code,500)
+            output = {
+                'message': e.message}
+            if e.code == 'form_invalid':
+                output.update({
+                    'params': e.params})
         
         response.content = json.dumps(output)
             

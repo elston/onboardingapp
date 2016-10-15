@@ -10,6 +10,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <link rel="shortcut icon" type="image/ico" 
+        href="{% static 'favicon.ico' %}"/>
+
     <title>AllStacks</title>
 
     <link href="{% static "bootstrap/css/bootstrap.min.css" %}" 
@@ -37,24 +40,14 @@
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
-                    <a href="{% url 'dashboard:index' %}">a<span>ll</span>stacks</a>
-                </li>
-                <li>
-                    <a href="{% url 'teams' %}">Teams</a>
-                </li>
-                <li>
-                    <a href="{% url 'organization_list' %}">Organization</a>
-                </li>
-                <li>
-                    <a href="{% url 'plan' %}">Profile</a>
-                </li>
+                    <a href="{% url 'dashboard:index' %}">a<span>ll</span>stacks</a></li>
+
+                <li><a href="{% url 'teams' %}">Teams</a></li>
+                <li><a href="{% url 'organization_list' %}">Organization</a></li>
+                <li><a href="{% url 'plan' %}">Profile</a></li>
                 <ul>
-                    <li>
-                        <a href="{% url 'account_change_password' %}">Settings</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'account_logout' %}">Logout</a>
-                    </li>
+                    <li><a href="{% url 'account_change_password' %}">Settings</a></li>
+                    <li><a href="{% url 'account_logout' %}">Logout</a></li>
                 </ul>
             </ul>
         </div>
@@ -101,9 +94,9 @@
     <script src="{% static "bootstrap/bootstrap.min.js" %}"></script>
 
     <script src="{% static "furst/csrf.js" %}"></script>
-    <script src="{% static "furst/rpc.js" %}"></script>    
+    <script src="{% static "furst/rpc.js" %}"></script>
+    <script src="{% static "furst/alerts.js" %}"></script>    
 
-    <script src="{% static "base/cls.js" %}"></script>
     <script src="{% static "base/init.js" %}"></script>    
 
     {% block script %}

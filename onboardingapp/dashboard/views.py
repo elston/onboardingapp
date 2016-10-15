@@ -51,14 +51,20 @@ def index(request):
         result[service] = len(unique_members)
 
     # ...
-    create_team_form = CreateTeamAndOrgForm()
-    if user.organizations.all():
-        create_team_form = CreateTeamForm(user=user)
-
-
     context = {
         'teams': teams,
         'services_list': result,
-        'create_team_form':create_team_form,
     }
+
+    # ...
+    if not teams:
+        create_team_form = CreateTeamAndOrgForm()
+        if user.organizations.all():
+            create_team_form = CreateTeamForm(
+                user=user)    
+        # ..
+        context.update({
+            'create_team_form':create_team_form,
+        })
+
     return render(request, 'dashboard/index.html', context)

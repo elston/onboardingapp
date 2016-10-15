@@ -6,9 +6,14 @@ Cls.CreateTeamForm = $.inherit(Cls.LightBoxForm, {
     // ..
 
 
-    error:function (result) {
+    error:function (result, request) {
         console.log('error',result);
-    },        
+        console.log(request.xhr.status);        
+        console.log(request.xhr.statusText);
+        var msg = request.xhr.responseJSON.message;
+        App.Alerts.show(msg);
+    },   
+
 
 });
 
