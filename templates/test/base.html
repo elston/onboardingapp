@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="shortcut icon" type="image/ico" 
+        href="{% static 'favicon.ico' %}"/>
+
+    <title>AllStacks</title>
+
+    <link href="{% static "bootstrap/css/bootstrap.min.css" %}" 
+        rel="stylesheet" type="text/css">
+
+
+    <!-- base stylesheet -->
+    <link href="{% static "test/css/base.css" %}" 
+        rel="stylesheet" type="text/css">       
+    <link href="{% static "test/css/sidebar.css" %}" 
+        rel="stylesheet" type="text/css">  
+    <link href="{% static "test/css/content.css" %}" 
+        rel="stylesheet" type="text/css">
+    <link href="{% static "test/css/message.css" %}" 
+        rel="stylesheet" type="text/css">   
+    <link href="{% static "test/css/header.css" %}" 
+        rel="stylesheet" type="text/css">                
+
+    <!-- end base stylesheet -->                              
+   
+    <link href="{% static "test/css/font-awesome.min.css" %}" 
+        rel="stylesheet" type="text/css">
+
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' 
+        rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' 
+        rel='stylesheet' type='text/css'>
+
+    {% block extra_head %}
+    {% endblock %}
+
+</head>
+
+<body>
+
+    <div id="sidebar-wrapper" class="">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="{% url 'dashboard:index' %}">a<span>ll</span>stacks</a></li>
+
+            <li {%if sidebar.team.active %}class="sidebar-active"{%endif%}>
+                <a href="{% url 'team:index' %}">Teams</a></li>            
+
+            <li {%if sidebar.organization.active %}class="sidebar-active"{%endif%}>
+                <a href="{% url 'organization:index' %}">Organization</a></li>
+
+        </ul>    
+        <ul class="sidebar-bottom">
+            <li>
+                <a href="{% url 'account_change_password' %}">Settings</a></li>        
+            <li>
+                <a href="{% url 'account_logout' %}">Logout</a></li>                
+        </ul>        
+    </div>
+
+
+    <div id="content-wrapper" class="">     
+
+            <!-- Messages -->
+            <div id="message-wrapper">
+                hfghgf
+                <br>                
+                dsfgsdf
+                <br>
+                sdf
+                <br>                
+                dsf
+            </div>
+            <!-- /Messages -->  
+
+            <div id="header-wrapper">
+                gjhgjh
+            </div>
+    
+    </div>
+
+
+
+    <script src="{% static "jquery/jquery.js" %}"></script>
+    <script src="{% static "bootstrap/bootstrap.min.js" %}"></script>
+
+    {% block script %}
+    {% endblock %}
+
+</body>
+
+</html>

@@ -1,4 +1,4 @@
-www.allstocks.com
+www.allstacks.com
 
 OOPJavaScrit & RPC-django 1.9.5 python3 sqlite bootstrap 
 

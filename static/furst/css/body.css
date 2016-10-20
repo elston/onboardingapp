@@ -1,0 +1,39 @@
+#body-wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    height: 100%;
+}
+
+#body-wrapper.toggled {
+    padding-left: 300px;
+    /*width: 300px;    */
+    position: absolute;
+    margin-right: -300px;    
+}
+
+
+@media(min-width:768px) {
+    #body-wrapper {
+        padding-left: 300px;
+    }
+
+    #body-wrapper.toggled {
+        padding-left: 0;
+        width: 0;
+        position: relative;
+        margin-right: 0;        
+    }
+
+}
+
+@media (max-width: 768px){
+
+    #body-wrapper.toggled {
+        /*width: 230px;*/
+        padding-left: 230px;        
+    }    
+
+}

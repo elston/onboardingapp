@@ -4,7 +4,7 @@ from .models import TeamUser
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.utils.translation import ugettext, ugettext_lazy as _
 
-from .validators import ValidationFormMixin
+from onboardingapp.validators import FormValidationMixin
 
 class UserCreationForm(forms.ModelForm):
     # ...
@@ -81,7 +81,7 @@ class TeamEditForm(forms.Form):
         required=False
     )     
 
-class CreateTeamForm(forms.Form,ValidationFormMixin):
+class CreateTeamForm(forms.Form,FormValidationMixin):
 
     organization = forms.ModelChoiceField(
         queryset=Organization.objects.all(),
@@ -110,7 +110,7 @@ class CreateTeamForm(forms.Form,ValidationFormMixin):
                 owner=user)
 
 
-class CreateTeamAndOrgForm(forms.Form,ValidationFormMixin):
+class CreateTeamAndOrgForm(forms.Form,FormValidationMixin):
 
     whith_org = forms.BooleanField(
         widget=forms.HiddenInput(),

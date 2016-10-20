@@ -27,14 +27,7 @@
     <link href="{% static "furst/css/content.css" %}" 
         rel="stylesheet" type="text/css">                
     <link href="{% static "furst/css/message.css" %}" 
-        rel="stylesheet" type="text/css">  
-    <link href="{% static "furst/css/header.css" %}" 
-        rel="stylesheet" type="text/css"> 
-    <link href="{% static "furst/css/main.css" %}" 
-        rel="stylesheet" type="text/css">   
-    <link href="{% static "furst/css/footer.css" %}" 
-        rel="stylesheet" type="text/css">                 
-                              
+        rel="stylesheet" type="text/css">                
     
 
     <link href="{% static "furst/css/font-awesome.min.css" %}" 
@@ -45,8 +38,8 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' 
         rel='stylesheet' type='text/css'>
 
-    <link href="{% static "furst/css/checkbox_and_radio.css" %}" 
-        rel="stylesheet" type="text/css">    
+    <link href="{% static "furst/css/build.css" %}" 
+        rel="stylesheet" type="text/css">
 
     {% block extra_head %}{% endblock %}
 
@@ -54,7 +47,6 @@
 
 <body>
 
-    <!-- Body -->
     <div id="body-wrapper">
 
         <!-- Sidebar -->
@@ -98,7 +90,7 @@
             <!-- /Messages -->
 
             <!-- Header -->
-            <div id="header-wrapper" class="col-xs-12">
+            <div id="page-content-header" class="col-xs-12">
                 <i id="menu-toggle" class="fa fa-2x fa-bars pull-left" aria-hidden="true"></i>
                 <ol class="breadcrumb pull-left">
                     {% block breadcrumb %}
@@ -108,24 +100,18 @@
             </div>
             <!-- End Header -->
 
-            <!-- Main -->
-            <div id="main-wrapper" class="container-fluid">
+            <!-- main -->
+            <div class="container-fluid">
                 {% block main %}
                 {% endblock %}
             </div>
-            <!-- End Main -->
+            <!-- End main -->
 
-            <div id="footer-wrapper">
-                AllStacks (c) 2016 by Sativa Elements ltd.
-            </div>                 
         </div>
         <!-- End Content -->        
 
     </div>
-    <!-- End Body -->            
 
-    {% block hidden %}
-    {% endblock %}
 
     <script src="{% static "jquery/jquery.js" %}"></script>
     <script src="{% static "bootstrap/bootstrap.min.js" %}"></script>

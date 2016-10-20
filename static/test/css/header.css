@@ -1,0 +1,14 @@
+#header-wrapper {
+    position: absolute;    
+    top:0;
+    background: #d6655c;
+    border: 1px solid black;    
+    width: calc(100% - 300px);
+    height: 80px;    
+}
+
+@media (max-width:768px) {
+    #header-wrapper {
+        width: 100%;
+    }
+}

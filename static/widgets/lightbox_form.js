@@ -3,6 +3,11 @@ Cls.LightBoxForm = $.inherit($.util.Observable, {
     // ...
     form_id:null,
     action:$.noop,
+    templErrField: new Furst.Template('\
+        <div class="error" style="color: red;">\
+            {{error}} \
+        </div>\
+    '),
     // ..
     constructor : function(config){
         // ...
@@ -26,18 +31,17 @@ Cls.LightBoxForm = $.inherit($.util.Observable, {
     close: function (){
         this.shdowing_el.css('display','none');
         this.box_el.css('display','none');
-    },
-
-    success:function (result) {
-        console.log(result);
-        this.reset()
-            .close();
+        // ...
+        this
+            .removeErrLabel()
+            .reset();        
     },
 
     submit:function (e) {
         var me = e.data;
         var data = me.form_el.serialize();        
         // ..
+        me.removeErrLabel();
         me.action(
             data,
             me.success, 
@@ -49,6 +53,40 @@ Cls.LightBoxForm = $.inherit($.util.Observable, {
 
     reset:function () {
         this.form_el[0].reset();
+        return this;
+    },
+
+    success:function (result) {
+        // ...
+        this.reset()
+            .close();
+    },
+
+    error:function (result, request) {
+        // ..
+        var xhr = request.xhr;
+        var response = xhr.responseJSON
+        // ...
+        App.Alerts.show(response.message);
+        if (xhr.status == 400) {        
+            this.markErrField(response.params);
+        };
+    },   
+
+    markErrField:function (param) {
+        for (var k in param) {
+            this.form_el
+                .find('input[name=' + k + ']')
+                .before(this.templErrField.compile({
+                    error:param[k]
+                }));
+        }; 
+    },  
+
+    removeErrLabel:function (argument) {
+        this.form_el
+            .find('.error')
+            .remove();
         return this;
     },
 });

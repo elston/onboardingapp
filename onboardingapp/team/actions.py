@@ -5,7 +5,7 @@ from .forms import (
     CreateTeamForm, 
     CreateTeamAndOrgForm,)
 
-from .validators import OrgOwnerValidator
+from organization.validators import OrgOwnerValidator
 
 class TeamActions(object):
     # ...
@@ -18,13 +18,13 @@ class TeamActions(object):
             form_cls = CreateTeamAndOrgForm
         # ..
         # form = form_cls(qd_data)        
-        form = form_cls({'team_name':'gdsgds'})        
-        form.test()
+        form = form_cls({'team_name':'gdsgds'})\
+            .test()
         # ...
         validator = OrgOwnerValidator(
             org =form.cleaned_data['organization'],
-            user=user)
-        validator.test()
+            user=user)\
+            .test()
 
         return {'success':True}
 # .....

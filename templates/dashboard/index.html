@@ -62,12 +62,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     Hey, you don't have any teams!  Add one to get started!
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <a href="javascript:void(0)" onclick="App.CreateTeamForm.open()">
-                        <img src="{% static 'furst/img/addbox.png' %}" class="img-responsive">
-                    </a>
-                    <h4 class="text-center text-muted">Add a Team</h2>
-                </div>
+                {% include "widgets/team_create_botton.html" %}        
 
             {% endif %}
         </div>
