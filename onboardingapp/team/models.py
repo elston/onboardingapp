@@ -94,11 +94,11 @@ class Team(models.Model):
         return self.name
 
 
-class ErrorLog(models.Model):
+class Log(models.Model):
     timestamp = models.DateTimeField(default=datetime.datetime.now)
-    user = models.ForeignKey(TeamUser, related_name='errorlogs')
-    team = models.ForeignKey(Team, related_name='errorlogs')
-    service = models.ForeignKey(Service, related_name='errorlogs')
+    user = models.ForeignKey(TeamUser, related_name='logs')
+    team = models.ForeignKey(Team, related_name='logs')
+    service = models.ForeignKey(Service, blank=True,null=True,related_name='logs')
     text = models.TextField()
 
     class Meta:

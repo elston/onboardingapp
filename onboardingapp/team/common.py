@@ -1,4 +1,4 @@
-from .models import ErrorLog
+from .models import Log
 
 
 from django.conf import settings

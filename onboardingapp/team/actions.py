@@ -28,8 +28,13 @@ class TeamActions(object):
             user=user)\
             .test()
 
+        record = {
+            'organization':form.cleaned_data['organization'],
+            'team_name':form.cleaned_data['team_name'],
+            'team_description':form.cleaned_data['team_description'],            
+        }
         return {
             'success':True,
             'message':'Team created successfully',
+            'record':record,
         }
-# .....

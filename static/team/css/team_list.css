@@ -14,9 +14,13 @@
 
 #team-list-toolbox.row {
     margin: 0;
-    padding-top: 10px;
+    /*padding-top: 10px;*/
     padding-bottom: 10px;    
     border-bottom: 1px solid #eee; 
+}
+
+.toolbox-panel {
+    margin-top:10px; 
 }
 
 
@@ -30,6 +34,16 @@
     overflow-y: auto;    
     /*margin-top: calc(80px);*/
 }
+
+@media (max-width:768px) {
+    #team-list-data {
+    top: 97px;
+    height: calc(100% - 97px);
+    }
+
+}
+
+
 #team-list-data.list-group {
     padding-left: 0;
     margin-bottom: 0px

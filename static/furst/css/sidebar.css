@@ -27,7 +27,8 @@
 }
 
 .sidebar-nav {
-    height: calc(100% - 110px);
+    /*height: calc(100% - 110px);*/
+    height: calc(100% - 165px);    
     overflow-y: auto;    
 }
 

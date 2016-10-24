@@ -25,14 +25,18 @@
 <!-- Toolbox -->
 <div id="team-list-toolbox" class="row">
 
-    <div class="col-xs-6">
-        <button id="team-list-toolbox__add-team-btn" type="button" class="btn btn-primary">
+    <div class="col-lg-6 col-sm-6 col-xs-12 toolbox-panel">
+        <button id="team-list-toolbox__create-btn" type="button" class="btn btn-primary">
             <span class="fa fa-plus __iconspacer"></span>
-            Add a Team
+            Add
         </button>
+        <button id="team-list-toolbox__remove-btn" type="button" class="btn btn-danger">
+            <span class="fa fa-minus __iconspacer"></span>
+            Remove
+        </button>        
     </div>
 
-    <div class="col-xs-6">
+    <div class="col-lg-6 col-sm-6 col-xs-12 toolbox-panel">
         <div class="input-group">
             <div class="input-group-addon"><i class="fa fa-search"></i></div>
             <select id="teams_filter" class="form-control">
@@ -123,7 +127,6 @@
 {% block script %}
     <script src="{% url 'team:api' %}"></script>       
     <script src="{% static 'widgets/lightbox_form.js' %}"></script>
-    <script src="{% static 'team/team_create_form.js' %}"></script>        
     <script src="{% static 'team/init.js' %}"></script>      
 {% endblock %}
 

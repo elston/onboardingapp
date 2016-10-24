@@ -124,7 +124,7 @@ class AccountAdmin(admin.ModelAdmin):
 admin.site.register(Account,AccountAdmin)
 
 
-class ErrorLogAdmin(admin.ModelAdmin):
+class LogAdmin(admin.ModelAdmin):
     list_display = (
         'pk',
         'timestamp',
@@ -135,7 +135,7 @@ class ErrorLogAdmin(admin.ModelAdmin):
     list_display_links = (
         'timestamp',
     )    
-admin.site.register(ErrorLog,ErrorLogAdmin)
+admin.site.register(Log,LogAdmin)
 
 
 class AdditionalInfoAdmin(admin.ModelAdmin):

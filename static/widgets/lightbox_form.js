@@ -1,5 +1,5 @@
-$.ns('Cls.LightBoxForm');
-Cls.LightBoxForm = $.inherit($.util.Observable, {
+$.ns('Furst.LightBoxForm');
+Furst.LightBoxForm = $.inherit($.util.Observable, {
     // ...
     form_id:null,
     action:$.noop,
@@ -18,7 +18,7 @@ Cls.LightBoxForm = $.inherit($.util.Observable, {
         this.btnClose = $('#'+this.form_id+'__close-btn');
         // ..
         $.extend(this, config);
-        Cls.LightBoxForm.superclass.constructor.call(this, config);
+        Furst.LightBoxForm.superclass.constructor.call(this, config);
         // ..
         this.form_el
             .on('submit',this,this.submit);
