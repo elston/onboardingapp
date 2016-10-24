@@ -8,7 +8,7 @@ Cls.Alerts = $.inherit($.util.Observable, {
     templ:new Furst.Template('\
         <div class="alert alert-{{type}} alert-message" role="alert"> \
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"> \
-                <span aria-hidden="true">&times;</span> \
+                <i class="fa fa-times"></i> \
             </button> \
             {{message}} \
         </div> \
@@ -31,16 +31,21 @@ Cls.Alerts = $.inherit($.util.Observable, {
     },
 
 
-    show:function (msg) {
+    show:function (msg,type) {
+        if (!type){
+            type = 'danger';
+        };
         // ...
         var html = this.templ.compile({
-            type:'danger',
-            message:msg,
+            'type':type,
+            'message':msg,
         });
         // ..
         this.wrp_el.append(html);
         setTimeout(function() {
-            html.hide('slow');
+            html.hide('slow',function() {
+                html.remove();
+            });
         }, 5000);        
     },
 

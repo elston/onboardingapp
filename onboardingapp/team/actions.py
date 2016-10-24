@@ -17,14 +17,19 @@ class TeamActions(object):
         if whith_org:
             form_cls = CreateTeamAndOrgForm
         # ..
-        # form = form_cls(qd_data)        
-        form = form_cls({'team_name':'gdsgds'})\
-            .test()
+        form = form_cls(qd_data).test()        
+        # form = form_cls({
+        #     'whith_org':True,
+        #     'team_name':'gdsgds',
+        # }).test()
         # ...
         validator = OrgOwnerValidator(
             org =form.cleaned_data['organization'],
             user=user)\
             .test()
 
-        return {'success':True}
+        return {
+            'success':True,
+            'message':'Team created successfully',
+        }
 # .....

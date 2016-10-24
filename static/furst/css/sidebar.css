@@ -1,54 +1,45 @@
+/*
+*   wrapper
+*/
 #sidebar-wrapper {
 
-    position: fixed;
-    left: 300px;
-    width: 0;
-    height: 100%;
-    margin-left: -300px;
+    /*decoration*/
     overflow-y: auto;
     background: #434345;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
+
+    /*position*/
+    position: absolute;
+    height: 100%;
+    width: 250px;
+    z-index: 10;    
+
 }
 
-@media (min-width:768px) {
-    #sidebar-wrapper {
-        width: 300px;
-    }
-}
 
-@media (max-width: 768px){
-    #sidebar-wrapper {
-        left: 230px;
-        margin-left: -230px;        
-    }
+/*
+*   sidebar-nav
+*/
+.sidebar-nav,
+.sidebar-bottom {
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .sidebar-nav {
-    position: absolute;
-    top: 0;
-    width: 300px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    height: 100%;
+    height: calc(100% - 110px);
+    overflow-y: auto;    
 }
 
-.sidebar-nav ul{
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    padding: 0;
-}
 
-.sidebar-nav li {
+.sidebar-nav li,
+.sidebar-bottom li{
     text-indent: 20px;
     line-height: 35px;
 }
 
-.sidebar-nav li a {
+.sidebar-nav li a,
+.sidebar-bottom  li a {
     display: block;
     text-decoration: none;
     color: #e3e3e3;
@@ -60,24 +51,32 @@
     text-transform: uppercase;
 }
 
-.sidebar-nav li a:hover {
+.sidebar-nav li a:hover ,
+.sidebar-bottom li a:hover {
     text-decoration: none;
     color: #fff;
     background: rgba(255,255,255,0.2);
 }
 
 .sidebar-nav li a:active,
-.sidebar-nav li a:focus {
+.sidebar-nav li a:focus ,
+.sidebar-bottom li a:active,
+.sidebar-bottom li a:focus  
+{
     text-decoration: none;
 }
 
+
+
+/*
+*   brand
+*/
 .sidebar-nav > .sidebar-brand {
     height: 80px;
     font-size: 18px;
     line-height: 60px;
     margin-bottom: 25%;
 }
-
 .sidebar-nav > .sidebar-brand a {
     text-indent: 0px;
     padding: 10px 0;
@@ -97,6 +96,9 @@
     background: rgba(44, 143, 185, 0.7);
 }
 
-.sidebar-nav > .sidebar-active {
+/*
+*   active
+*/
+.sidebar-nav > .active {
     background: rgba(255,255,255,0.1);
 }

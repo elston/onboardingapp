@@ -1,13 +1,9 @@
 #message-wrapper{
-    position: relative;
-    top:10px;
+    position: absolute;
     width: 40%;
     margin-left: 40%;
-    /*margin-top: 5px;*/
+    margin-top: 5px;
     z-index: 9999;
-
-    background: #ddbdff;
-    border: 1px solid black;
 }
 .alert-message{
     width: 100%;

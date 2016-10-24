@@ -18,25 +18,23 @@
     <link href="{% static "bootstrap/css/bootstrap.min.css" %}" 
         rel="stylesheet" type="text/css">
 
-    <link href="{% static "furst/css/base.css" %}" 
-        rel="stylesheet" type="text/css">
-    <link href="{% static "furst/css/body.css" %}" 
-        rel="stylesheet" type="text/css">                
-    <link href="{% static "furst/css/sidebar.css" %}" 
-        rel="stylesheet" type="text/css">        
-    <link href="{% static "furst/css/content.css" %}" 
-        rel="stylesheet" type="text/css">                
-    <link href="{% static "furst/css/message.css" %}" 
-        rel="stylesheet" type="text/css">  
-    <link href="{% static "furst/css/header.css" %}" 
-        rel="stylesheet" type="text/css"> 
-    <link href="{% static "furst/css/main.css" %}" 
-        rel="stylesheet" type="text/css">   
-    <link href="{% static "furst/css/footer.css" %}" 
-        rel="stylesheet" type="text/css">                 
-                              
-    
 
+    <!-- base stylesheet -->
+    <link href="{% static "furst/css/base.css" %}" 
+        rel="stylesheet" type="text/css">       
+    <link href="{% static "furst/css/sidebar.css" %}" 
+        rel="stylesheet" type="text/css">  
+    <link href="{% static "furst/css/content.css" %}" 
+        rel="stylesheet" type="text/css">
+    <link href="{% static "furst/css/message.css" %}" 
+        rel="stylesheet" type="text/css">   
+    <link href="{% static "furst/css/header.css" %}" 
+        rel="stylesheet" type="text/css">  
+    <link href="{% static "furst/css/footer.css" %}" 
+        rel="stylesheet" type="text/css">                        
+
+
+    <!-- addition stylesheet -->                                 
     <link href="{% static "furst/css/font-awesome.min.css" %}" 
         rel="stylesheet" type="text/css">
 
@@ -46,84 +44,71 @@
         rel='stylesheet' type='text/css'>
 
     <link href="{% static "furst/css/checkbox_and_radio.css" %}" 
-        rel="stylesheet" type="text/css">    
+        rel="stylesheet" type="text/css">  
 
-    {% block extra_head %}{% endblock %}
+    {% block extra_head %}
+    {% endblock %}
 
 </head>
 
 <body>
 
-    <!-- Body -->
-    <div id="body-wrapper">
-
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-
-                <li class="sidebar-brand">
-                    <a href="{% url 'dashboard:index' %}">a<span>ll</span>stacks</a></li>
-
-                <li {%if sidebar.team.active %}class="sidebar-active"{%endif%}>
-                    <a href="{% url 'team:index' %}">Teams</a></li>
-
-                <li {%if sidebar.organization.active %}class="sidebar-active"{%endif%}>
-                    <a href="{% url 'organization:index' %}">Organization</a></li>
-
-                <ul>
-                    <li><a href="{% url 'account_change_password' %}">Settings</a></li>
-                    <li><a href="{% url 'account_logout' %}">Logout</a></li>
-                </ul>
-            </ul>
+    <!-- Messages -->
+    <div id="message-wrapper" class="">
+    {% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{% if message.tags and message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-message" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            {{ message }}
         </div>
-        <!-- End Sidebar -->
+    {% endfor %}
+    {% endif %}
+    </div>
 
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper" class="">
+        
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="{% url 'dashboard:index' %}">a<span>ll</span>stacks</a></li>
+            <li {%if sidebar.team.active %}class="active"{%endif%}>
+                <a href="{% url 'team:index' %}">Teams</a></li>            
+            <li {%if sidebar.organization.active %}class="active"{%endif%}>
+                <a href="{% url 'organization:index' %}">Organization</a></li>
+        </ul>  
 
-        <!-- Content -->
-        <div id="content-wrapper">
-
-            <!-- Messages -->
-            <div id="message-wrapper">
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="alert alert-{% if message.tags and message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-message" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% endif %}
-            </div>
-            <!-- /Messages -->
-
-            <!-- Header -->
-            <div id="header-wrapper" class="col-xs-12">
-                <i id="menu-toggle" class="fa fa-2x fa-bars pull-left" aria-hidden="true"></i>
-                <ol class="breadcrumb pull-left">
-                    {% block breadcrumb %}
-                    {% endblock  %}
-                </ol>
-                <a href="{% url 'account_logout' %}" class="pull-right">Logout</a>
-            </div>
-            <!-- End Header -->
-
-            <!-- Main -->
-            <div id="main-wrapper" class="container-fluid">
-                {% block main %}
-                {% endblock %}
-            </div>
-            <!-- End Main -->
-
-            <div id="footer-wrapper">
-                AllStacks (c) 2016 by Sativa Elements ltd.
-            </div>                 
-        </div>
-        <!-- End Content -->        
+        <ul class="sidebar-bottom">
+            <li>
+                <a href="{% url 'account_change_password' %}">Settings</a></li>        
+            <li>
+                <a href="{% url 'account_logout' %}">Logout</a></li>                
+        </ul>        
 
     </div>
-    <!-- End Body -->            
 
+    <!-- Header -->
+    <div id="header-wrapper" class="">
+        <i id="menu-toggle" class="fa fa-2x fa-bars pull-left"></i>
+        <ol class="breadcrumb pull-left">
+            {% block breadcrumb %}
+            {% endblock  %}
+        </ol>                
+    </div>
+
+    <!-- Content -->
+    <div id="content-wrapper" class="">     
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <div id="footer-wrapper">
+        AllStacks (c) 2016 by Sativa Elements ltd.
+    </div>  
+
+    <!-- Hidden -->
     {% block hidden %}
     {% endblock %}
 
@@ -133,14 +118,11 @@
     <script src="{% static "furst/csrf.js" %}"></script>
     <script src="{% static "furst/rpc.js" %}"></script>
     <script src="{% static "furst/templates.js" %}"></script>    
-    <script src="{% static "furst/alerts.js" %}"></script>    
-
-
-    <script src="{% static "base/init.js" %}"></script>    
+    <script src="{% static "furst/alerts.js" %}"></script>        
+    <script src="{% static "furst/header.js" %}"></script>            
 
     {% block script %}
     {% endblock %}
 
 </body>
-
 </html>

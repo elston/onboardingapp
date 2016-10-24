@@ -1,21 +1,32 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
+
 {% block extra_head %}
-    <link href="{% static "widgets/css/lightbox_form.css" %}" rel="stylesheet" type="text/css">
-    <link href="{% static "widgets/css/team_create_form.css" %}" rel="stylesheet" type="text/css">
-    <link href="{% static "widgets/css/team_list.css" %}" rel="stylesheet" type="text/css">    
+
+    <link href="{% static 'widgets/css/lightbox_form.css' %}" 
+        rel="stylesheet" type="text/css">
+
+ 
+
+    <link href="{% static 'team/css/team_list.css' %}" 
+        rel="stylesheet" type="text/css">        
+
 {% endblock %}
 
+
 {% block breadcrumb %}
-    {% if org %}<li>{{ org.name }}</li>{% endif %}
     <li class="active">Teams</li>
 {% endblock %}
 
-{% block main %}
-<div id="team-list-panel" class="row">
+
+{% block content %}
+
+<!-- Toolbox -->
+<div id="team-list-toolbox" class="row">
+
     <div class="col-xs-6">
-        <button type="button" class="btn btn-primary" onclick="App.CreateTeamForm.open()">
+        <button id="team-list-toolbox__add-team-btn" type="button" class="btn btn-primary">
             <span class="fa fa-plus __iconspacer"></span>
             Add a Team
         </button>
@@ -33,10 +44,11 @@
                 {% endfor %}
             </select>
         </div>
-    </div>
+    </div>    
 </div>
 
-<div id="team-list" class="list-group">
+<!-- Data -->
+<div id="team-list-data" class="list-group">
     <a  class="list-group-item ">
         <h4 class="list-group-item-heading">First List Group Item Heading</h4>
         <p class="list-group-item-text">List Group Item Text</p>
@@ -49,21 +61,69 @@
         <h4 class="list-group-item-heading">Third List Group Item Heading</h4>
         <p class="list-group-item-text">List Group Item Text</p>
     </a>
-                
-           
-</div>    
 
+    <a  class="list-group-item">
+        <h4 class="list-group-item-heading">Third List Group Item Heading</h4>
+        <p class="list-group-item-text">List Group Item Text</p>
+    </a>
+    <a  class="list-group-item">
+        <h4 class="list-group-item-heading">Third List Group Item Heading</h4>
+        <p class="list-group-item-text">List Group Item Text</p>
+    </a>
+    <a  class="list-group-item">
+        <h4 class="list-group-item-heading">Third List Group Item Heading</h4>
+        <p class="list-group-item-text">List Group Item Text</p>
+    </a>
+    <a  class="list-group-item">
+        <h4 class="list-group-item-heading">Third List Group Item Heading</h4>
+        <p class="list-group-item-text">List Group Item Text</p>
+    </a>                        
+
+    <a  class="list-group-item">
+        <h4 class="list-group-item-heading">Third List Group Item Heading</h4>
+        <p class="list-group-item-text">List Group Item Text</p>
+    </a>
+    <a  class="list-group-item">
+        <h4 class="list-group-item-heading">Third List Group Item Heading</h4>
+        <p class="list-group-item-text">List Group Item Text</p>
+    </a>
+    <a  class="list-group-item">
+        <h4 class="list-group-item-heading">Third List Group Item Heading</h4>
+        <p class="list-group-item-text">List Group Item Text</p>
+    </a>
+    <a  class="list-group-item">
+        <h4 class="list-group-item-heading">Third List Group Item Heading</h4>
+        <p class="list-group-item-text">List Group Item Text</p>
+    </a>  
+    <a  class="list-group-item">
+        <h4 class="list-group-item-heading">Third List Group Item Heading</h4>
+        <p class="list-group-item-text">List Group Item Text</p>
+    </a>
+    <a  class="list-group-item">
+        <h4 class="list-group-item-heading">Third List Group Item Heading</h4>
+        <p class="list-group-item-text">List Group Item Text</p>
+    </a>
+    <a  class="list-group-item">
+        <h4 class="list-group-item-heading">Third List Group Item Heading</h4>
+        <p class="list-group-item-text">List Group Item Text</p>
+    </a>
+    <a  class="list-group-item">
+        <h4 class="list-group-item-heading">Third List Group Item Heading</h4>
+        <p class="list-group-item-text">List Group Item Text</p>
+    </a>               
+</div> 
 {% endblock %}
 
 
 {% block hidden %}
-    {% include 'widgets/team_create_form.html' %}
+{% include 'team/team_create_form.html' %}
 {% endblock %}
 
 
 {% block script %}
-    <script src="{% url 'team:api' %}"></script>         
+    <script src="{% url 'team:api' %}"></script>       
     <script src="{% static 'widgets/lightbox_form.js' %}"></script>
-    <script src="{% static 'widgets/team_create_form.js' %}"></script>
+    <script src="{% static 'team/team_create_form.js' %}"></script>        
+    <script src="{% static 'team/init.js' %}"></script>      
 {% endblock %}
 

@@ -13,11 +13,11 @@ urlpatterns = [
     url(r'^team/', include('team.urls','team')),    
     url(r'^organization/', include('organization.urls','organization')),
 
-    url(r'^test/$',
-        TemplateView.as_view(
-            template_name='test/index.html'
-        ),
-        name='test'),
+    # url(r'^test/$',
+    #     TemplateView.as_view(
+    #         template_name='test/index.html'
+    #     ),
+    #     name='test'),
 ]
 
 from team.urls import urlpatterns as team_urlpatterns

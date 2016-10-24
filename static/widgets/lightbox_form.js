@@ -15,11 +15,15 @@ Cls.LightBoxForm = $.inherit($.util.Observable, {
         this.box_el         = $('#'+this.form_id+'_box');
         this.form_el        = $("#"+this.form_id);
         // ..
+        this.btnClose = $('#'+this.form_id+'__close-btn');
+        // ..
         $.extend(this, config);
         Cls.LightBoxForm.superclass.constructor.call(this, config);
         // ..
         this.form_el
             .on('submit',this,this.submit);
+        this.btnClose            
+            .on('click',this,this.close);
     },
     
     open: function (){
@@ -28,12 +32,15 @@ Cls.LightBoxForm = $.inherit($.util.Observable, {
         this.box_el.css('display','block');
     },
 
-    close: function (){
-        this.shdowing_el.css('display','none');
-        this.box_el.css('display','none');
+    close: function (e){
+        var me = this;                    
+        if ((e)&&(e.data)){
+            me = e.data;};
         // ...
-        this
-            .removeErrLabel()
+        me.shdowing_el.css('display','none');
+        me.box_el.css('display','none');
+        // ...
+        me.removeErrLabel()
             .reset();        
     },
 
@@ -56,8 +63,9 @@ Cls.LightBoxForm = $.inherit($.util.Observable, {
         return this;
     },
 
-    success:function (result) {
+    success:function (result,provider) {
         // ...
+        App.Alerts.show(result.message,'success');        
         this.reset()
             .close();
     },

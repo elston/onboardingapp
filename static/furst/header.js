@@ -3,15 +3,20 @@
 $.ns('Cls.MenuToggleBtn');
 Cls.MenuToggleBtn = $.inherit($.util.Observable, {
     // ..
-    el:null,    
-    el_body:null,        
-    id:'menu-toggle',
-    id_body:'body-wrapper',
+    el:null,
+    items:[],
     // ..
     constructor : function(config){
         // ...
-        this.el = $("#"+this.id);
-        this.el_body = $("#"+this.id_body);
+        this.el = $("#menu-toggle");
+        this.items = [
+            $('#content-wrapper'),
+            $('#sidebar-wrapper'),
+            $('#header-wrapper'),
+            $('#message-wrapper'),
+            $('#footer-wrapper')
+        ];
+
         // ..
         $.extend(this, config);
         Cls.MenuToggleBtn.superclass.constructor.call(this, config);
@@ -21,10 +26,17 @@ Cls.MenuToggleBtn = $.inherit($.util.Observable, {
     },
 
     onclick:function (e) {
+        // ...
         var me = e.data;
         // ...
         e.preventDefault();
-        me.el_body.toggleClass("toggled");                
+        for (var i = 0; i < me.items.length; i++) {
+            me.items[i].toggleClass("hugeled");            
+        };
+    },
+
+    add:function (item) {
+        this.items.push(item);
     },
 });
 

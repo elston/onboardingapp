@@ -1,0 +1,54 @@
+/*
+*   team-list-toolbox
+*/
+#team-list-toolbox {
+    
+    /*decoration*/
+    background: #fff;
+
+    /*position*/
+    position: absolute;
+    width: 100%;
+    z-index: 3;    
+}
+
+#team-list-toolbox.row {
+    margin: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;    
+    border-bottom: 1px solid #eee; 
+}
+
+
+/*
+*   team-list-data
+*/
+#team-list-data{
+    position: relative;
+    top: 53px;
+    height: calc(100% - 53px);
+    overflow-y: auto;    
+    /*margin-top: calc(80px);*/
+}
+#team-list-data.list-group {
+    padding-left: 0;
+    margin-bottom: 0px
+}
+
+#team-list-data .list-group-item-text {
+    margin-top: 10px;
+}
+
+#team-list-data .list-group-item.active,
+#team-list-data .list-group-item.active:focus,
+#team-list-data .list-group-item.active:hover {
+    z-index: 2;
+    color: #000;
+    background-color: darkgrey;
+    border-color: darkgrey;
+}
+#team-list-data .list-group-item.active .list-group-item-text,
+#team-list-data .list-group-item.active:focus .list-group-item-text,
+#team-list-data .list-group-item.active:hover .list-group-item-text {
+    color: dimgrey;
+}

@@ -9,3 +9,4 @@ class FormValidationMixin(object):
                 code='form_invalid',
                 params={k:self.errors[k][0] for k in self.errors},
             )
+        return self
