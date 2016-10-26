@@ -7,6 +7,10 @@ urlpatterns = [
     url(r'^$',  
         views.Teams.as_view(), 
             name='index'),
+
+    url(r'^update/(?P<id>\d+)$',  
+        views.TeamUpdate.as_view(), 
+            name='update'),    
 ]
 
 

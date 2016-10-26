@@ -1,7 +1,7 @@
 from django.db.models import Q
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 from .models import (
     Team,)
@@ -74,3 +74,15 @@ class Teams(ListView):
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super(Teams, self).dispatch(request, *args, **kwargs)
+
+from .models import Team
+class TeamUpdate(DetailView):
+
+    template_name = 'team/update.html'
+    context_object_name = 'team'
+    pk_url_kwarg = 'id'
+    model = Team
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(Team, self).dispatch(request, *args, **kwargs)    

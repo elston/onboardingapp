@@ -52,30 +52,24 @@
 </div>
 
 <!-- Data -->
-<div id="team-list-wrapper">
-{% if not teams %}
-    <div id="team-empty-data"> 
-        There are no any teams 
-    </div>  
-{% else %}    
-    <ul id="team-list-data" class="list-group">
-        {% for team in teams %}
-        <li class="list-group-item" data-id = "{{team.id}}">
-            <div class="list-group-item-counter">{{forloop.counter}}</div>
-            <div class="list-group-item-wrapper">
-                <a href="{% url 'team:update' team.id %}">
-                    <h4 class="list-group-item-heading">
-                        {{team.name}}
-                    </h4>
-                </a> 
-                <p class="list-group-item-text">{{team.description}}</p>
-            </div> 
-            <div class="list-group-item-status">{% if team.is_active %}Active{%endif%}</div>           
-        </li>        
-        {% endfor %}           
-    </ul>     
-{% endif %}
-</div>    
+<ul id="team-list-data" class="list-group">
+
+    <li class="list-group-item" data-id = "1">
+        <a href="#"><h4 class="list-group-item-heading">List group item heading</h4> </a> 
+        <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+    </li>
+
+    <li class="list-group-item" data-id = "2">
+        <h4 class="list-group-item-heading">List group item heading</h4>
+        <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+    </li>
+
+    <li class="list-group-item" data-id = "3">
+        <h4 class="list-group-item-heading">List group item heading</h4>
+        <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+    </li>        
+           
+</ul> 
 
 {% endblock %}
 

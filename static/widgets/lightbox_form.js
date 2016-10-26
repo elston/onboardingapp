@@ -10,14 +10,16 @@ Furst.LightBoxForm = $.inherit($.util.Observable, {
     '),
     // ..
     constructor : function(config){
-        // ...
-        this.shdowing_el    = $("#"+this.form_id+'_shdowing');
-        this.box_el         = $('#'+this.form_id+'_box');
-        this.form_el        = $("#"+this.form_id);
-        // ..
-        this.btnClose = $('#'+this.form_id+'__close-btn');
         // ..
         $.extend(this, config);
+
+        // ...
+        this.form_el        = $("#"+this.form_id);
+        this.shdowing_el    = $("#"+this.form_id+'_shdowing');
+        this.box_el         = $('#'+this.form_id+'_box');
+        this.btnClose       = $('#'+this.form_id+'__close-btn');
+
+        // ..
         Furst.LightBoxForm.superclass.constructor.call(this, config);
         // ..
         this.form_el

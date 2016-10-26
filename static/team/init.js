@@ -2,16 +2,23 @@
 $.ns('Cls.ToolboxTeamList');
 Cls.ToolboxTeamList = $.inherit($.util.Observable, {
     // ..
+    toolbox_id:'',
+    form:null,
+    // ...
+    btn_create_id:'create-btn',
+    btn_remove_id:'remove-btn',    
+    // ..
     btnCreate:null,
     btnRemove:null,    
     // ..
     constructor : function(config){
         // ...
-        this.btnCreate = $("#team-list-toolbox__create-btn");
-        this.btnRemove = $("#team-list-toolbox__remove-btn");        
+        $.extend(this, config);
+        // ...
+        this.btnCreate = $("#"+this.toolbox_id+"__"+this.btn_create_id);
+        this.btnRemove = $("#"+this.toolbox_id+"__"+this.btn_remove_id);
 
         // ..
-        $.extend(this, config);
         Cls.ToolboxTeamList.superclass.constructor.call(this, config);
         // ..
         this.btnCreate.on('click',this,this.create);            
@@ -23,64 +30,18 @@ Cls.ToolboxTeamList = $.inherit($.util.Observable, {
         var me = e.data;
         // ...
         e.preventDefault();
-        App.CreateTeamForm.open();
+        me.form.open();
     },
 
     remove:function (e) {
-        console.log('sdfgsdf');
-
-    },
-
-});
-
-
-// ...
-$.ns('Cls.CreateTeamForm');
-Cls.CreateTeamForm = $.inherit(Furst.LightBoxForm, {
-    // ..
-    form_id:'create-team-form',
-    action:TeamActions.create,
-    // ..
-
-});
-
-
-
-
-$.ns('Cls.TeamList');
-Cls.TeamList = $.inherit($.util.Observable, {
-    // ..
-    list:null,
-    items:[],
-    // ..
-    constructor : function(config){
-        // ...
-        this.list = $("#team-list-data");
-
-        // ..
-        $.extend(this, config);
-        Cls.TeamList.superclass.constructor.call(this, config);
-        // ..
-        var list = this.list.children();
-        for (var i = 0; i < list.length; i++) {
-            var item = $(list[i]);
-            item.on('click',this,this.onClickRecord);            
+        var me  = e.data;
+        var currentrecord = me.list.getCurrentRecord();
+        if (currentrecord){
+            console.log(currentrecord.attr('data-id'));
         };
-
-    },
-    onClickRecord:function (e) {
-        var me = e.data;
-        var item = $(e.currentTarget);
-        // ...
-        me.list.children().each(function () {
-            $(this).removeClass('active');
-        });
-        item.toggleClass('active');
     },
 
 });
-
-
 
 
 
@@ -91,14 +52,23 @@ $(function($){
 
     // ..
     $.ns('App.CreateTeamForm');
-    App.CreateTeamForm = new Cls.CreateTeamForm();    
+    App.CreateTeamForm = new Furst.LightBoxForm({
+        form_id:'create-team-form',
+        action:TeamActions.create,        
+    });        
    
     // ..
-    $.ns('App.ToolboxTeamList');
-    App.ToolboxTeamList = new Cls.ToolboxTeamList();
+    $.ns('App.TeamList');
+    App.TeamList = new Furst.List({
+        list_id:'team-list-data',
+    });    
 
     // ..
-    $.ns('App.TeamList');
-    App.TeamList = new Cls.TeamList();    
+    $.ns('App.ToolboxTeamList');
+    App.ToolboxTeamList = new Cls.ToolboxTeamList({
+        toolbox_id:'team-list-toolbox',
+        form:App.CreateTeamForm,
+        list:App.TeamList,
+    });
 
 });
