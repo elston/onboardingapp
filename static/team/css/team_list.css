@@ -57,6 +57,7 @@
 */
 #team-list-data {
     /*list-style-type: decimal;*/
+    /*list-style: none;    */
 }
 
 
@@ -67,6 +68,7 @@
 
 #team-list-data .list-group-item {
     padding-left: 5px;
+    border-radius: 0px;    
 }
 
 

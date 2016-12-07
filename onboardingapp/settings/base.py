@@ -146,7 +146,7 @@ LOGGING = {
 }
 
 # Allauth
-LOGIN_REDIRECT_URL = "/dashboard"
+LOGIN_REDIRECT_URL = "/team"
 ACCOUNT_LOGOUT_REDIRECT_URL = "/accounts/login/"
 
 ACCOUNT_AUTHENTICATION_METHOD = 'email'

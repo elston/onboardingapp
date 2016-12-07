@@ -19,6 +19,11 @@ Furst.List = $.inherit($.util.Observable, {
             var item = $(list[i]);
             item.on('click',this,this.onRecord);            
         };
+        // ..
+        if (list.length > 0){
+            var record = $(list[0]);
+            this.activateRecord(record);
+        };
 
     },
 

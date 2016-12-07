@@ -1,0 +1,214 @@
+/*
+*   Navigation
+*/
+.navbar-custom {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 3;
+    font-family: oswald-reg;
+}
+
+.navbar-brand span{
+    color: #2e75b6;
+}
+
+.navbar-brand{
+    font-family: verdana;
+}
+
+.navbar-custom .nav li a {
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+@media only screen and (min-width: 768px) {
+    .navbar-custom {
+        background: transparent;
+        border-bottom: 1px solid transparent;
+        margin-top: 35px;
+    }
+    .navbar-custom .navbar-brand {
+        color: white;
+        padding: 8px 20px;
+        font-size: 35px;
+        font-weight: 400;
+    }
+    .navbar-custom .navbar-brand:hover,
+    .navbar-custom .navbar-brand:focus {
+        color: rgba(255, 255, 255, 0.8);
+    }
+    .navbar-custom .nav li a {
+        color: white;
+        padding: 10px 22px;
+    }
+    .navbar-custom .nav li a:hover,
+    .navbar-custom .nav li a:focus {
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover{
+        background-color: transparent;
+        border: 1px solid #fff;
+        border-radius: 8px;
+        color: #fff;
+    }
+}
+
+
+/*
+*   Account Section
+*/
+
+#account-section{
+    background-color: #2c8fb9;
+    padding-top: 100px;
+}
+#account-section h1{
+    margin: 35px 0;
+    color: #fff;
+    font-family: verdana;
+    font-size: 35px;
+    text-align: center;
+}
+#account-section h1 span{
+    color: #a4c6e0;
+}
+
+.bg-grey{
+    background-color: #e4e5e7;
+    padding: 20px;
+
+    margin-bottom: 40px;
+}
+.bg-grey h2{
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0 0 30px 0;
+}
+.bg-grey label{
+    display: block;
+}
+.bg-grey input{
+    width: 100%;
+    padding: 12px 10px;
+}
+.bg-grey .acc-btns{
+    width: 100%;
+    padding: 12px 10px;
+    color: #fff;
+    background-color: #2c8fb9;
+    border: 0;
+    text-transform: uppercase;
+    font-size: 20px;
+}
+.bg-grey label a{
+    text-decoration: none;
+    color: #2c8fb9;
+}
+#account-section p{
+    margin: 20px 0px 9px 0px !important;
+    color: #fff;
+}
+
+
+
+
+
+/*
+*   messages
+*/
+#messages-wrapper{
+    position: absolute;
+    width: 40%;
+    margin-left: 40%;
+    margin-top: 5px;
+    z-index: 9999;
+}
+.alert-message{
+    width: 100%;
+    opacity: 1;
+    filter: alpha(Opacity=100);
+}
+
+.errorlist{
+    color: red;
+    list-style: none;
+    padding-left: 0px;
+}
+
+.helptext{
+    margin-left: 10px;
+}
+.helptext a{
+    color: #0085a1;
+}
+
+
+
+/*
+*   Footer border section
+*/
+
+#footer-border #yellowDiv,
+#footer-border #blueDiv,
+#footer-border #orangeDiv{
+    padding: 2px 0;
+}
+#footer-border #yellowDiv{
+    background-color: #ebd200;
+}
+#footer-border #blueDiv{
+    background-color: #04557b;
+}
+#footer-border #orangeDiv{
+    background-color: #f36525;
+}
+
+.noPadMar{
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+
+
+/*
+*   Footer 
+*/
+
+footer {
+    background-color: #000;
+    padding: 15px 0;
+}
+
+
+.fa-lg {
+    font-size: 1.75em !important;
+}
+
+footer .footer-head{
+    color: white;
+    padding: 8px 20px;
+    font-weight: 400;
+    font-family: verdana;
+    text-decoration: none;
+    font-size: 35px;
+}
+
+footer .footer-head span{
+    color: #2e75b6;
+}
+
+footer .list-inline {
+  margin: 0;
+  padding: 8px 0;
+}
+
+footer .copyright {
+  font-size: 14px;
+  text-align: center;
+  margin: 24px 0 0 0;
+}

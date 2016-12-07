@@ -1,7 +1,6 @@
 from django.conf.urls import url
-
 from team import views
-
+# ...
 urlpatterns = [
 
     url(r'^$',  
@@ -14,9 +13,9 @@ urlpatterns = [
 ]
 
 
+# ...
 from .router import router
 api = router.api
-# ...
 urlpatterns = urlpatterns + [
     url(r'^api/$', api, name='api'),               
     url(r'^router/$', router, name='router'),    
