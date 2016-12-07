@@ -81,7 +81,8 @@
 
 
 {% block hidden %}
-{% include 'team/team_create_form.html' %}
+    {{ block.super }}
+    {% include 'team/team_create_form.html' %}
 {% endblock %}
 
 

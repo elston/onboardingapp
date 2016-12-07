@@ -72,7 +72,7 @@
         
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
-                <a href="{% url 'dashboard:index' %}">a<span>ll</span>stacks</a></li>
+                <a href="#">a<span>ll</span>stacks</a></li>
             <li {%if sidebar.team.active %}class="active"{%endif%}>
                 <a href="{% url 'team:index' %}">Teams</a></li>            
             <li {%if sidebar.organization.active %}class="active"{%endif%}>
@@ -109,6 +109,7 @@
 
     <!-- Hidden -->
     {% block hidden %}
+        {% include 'account/logout_form.html' %}    
     {% endblock %}
 
     <script src="{% static "jquery/jquery.js" %}"></script>

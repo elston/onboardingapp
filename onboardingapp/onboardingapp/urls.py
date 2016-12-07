@@ -9,7 +9,6 @@ urlpatterns = [
     url(r"^$", Homeview.as_view()),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('allauth.urls')),    
-    url(r'^dashboard/', include('dashboard.urls','dashboard')),
     url(r'^team/', include('team.urls','team')),    
     url(r'^organization/', include('organization.urls','organization')),
 
@@ -20,6 +19,6 @@ urlpatterns = [
     #     name='test'),
 ]
 
-from team.urls import urlpatterns as team_urlpatterns
-urlpatterns += team_urlpatterns
+# from team.urls import urlpatterns as team_urlpatterns
+# urlpatterns += team_urlpatterns
 
