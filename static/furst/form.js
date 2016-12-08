@@ -1,9 +1,9 @@
-$.ns('Furst.LightBoxForm');
-Furst.LightBoxForm = $.inherit($.util.Observable, {
+$.ns('Cls.Form');
+Cls.Form = $.inherit($.util.Observable, {
     // ...
     form_id:null,
     action:$.noop,
-    templErrField: new Furst.Template('\
+    templErrField: new Cls.Template('\
         <div class="error" style="color: red;">\
             {{error}} \
         </div>\
@@ -15,12 +15,12 @@ Furst.LightBoxForm = $.inherit($.util.Observable, {
 
         // ...
         this.form_el        = $("#"+this.form_id);
-        this.shdowing_el    = $("#"+this.form_id+'_shdowing');
+        this.shdowing_el    = $("#shdowing");
         this.box_el         = $('#'+this.form_id+'_box');
         this.btnClose       = $('#'+this.form_id+'__close-btn');
 
         // ..
-        Furst.LightBoxForm.superclass.constructor.call(this, config);
+        Cls.Form.superclass.constructor.call(this, config);
         // ..
         this.form_el
             .on('submit',this,this.submit);

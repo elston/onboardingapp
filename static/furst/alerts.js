@@ -5,7 +5,7 @@ Cls.Alerts = $.inherit($.util.Observable, {
     wrp_el:null,
     class:'alert',
     wrp_id:'message-wrapper',
-    templ:new Furst.Template('\
+    templ:new Cls.Template('\
         <div class="alert alert-{{type}} alert-message" role="alert"> \
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"> \
                 <i class="fa fa-times"></i> \

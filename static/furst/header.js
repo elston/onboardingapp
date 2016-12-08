@@ -47,14 +47,6 @@ Cls.MenuToggleBtn = $.inherit($.util.Observable, {
 
 
 
-$(function($){
-
-    // ..
-    $.ns('App.MenuToggleBtn');
-    App.MenuToggleBtn = new Cls.MenuToggleBtn();
-
-
-});
 
 
 

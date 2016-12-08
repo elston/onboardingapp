@@ -1,5 +1,5 @@
-$.ns('Furst.List');
-Furst.List = $.inherit($.util.Observable, {
+$.ns('Cls.List');
+Cls.List = $.inherit($.util.Observable, {
     // ..
     list_id:'',
     list:null,
@@ -12,7 +12,7 @@ Furst.List = $.inherit($.util.Observable, {
         // ...
         this.list = $('#' + this.list_id);
         // ..
-        Furst.List.superclass.constructor.call(this, config);
+        Cls.List.superclass.constructor.call(this, config);
         // ..
         var list = this.list.children();
         for (var i = 0; i < list.length; i++) {

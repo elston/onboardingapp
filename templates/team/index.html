@@ -4,12 +4,12 @@
 
 {% block extra_head %}
 
-    <link href="{% static 'widgets/css/lightbox_form.css' %}" 
+
+    <link href="{% static 'furst/css/checkbox_and_radio.css' %}" 
+        rel="stylesheet" type="text/css">  
+    <link href="{% static 'furst/css/form.css' %}" 
         rel="stylesheet" type="text/css">
-
- 
-
-    <link href="{% static 'team/css/team_list.css' %}" 
+    <link href="{% static 'team/css/list.css' %}" 
         rel="stylesheet" type="text/css">        
 
 {% endblock %}
@@ -77,19 +77,28 @@
 {% endif %}
 </div>    
 
+<!-- paginator -->
+<div id="team-list-paginator">Showing 1 to 10 of 41 rows</div>
+
+<!-- mask -->
+<div id="team-list-shdowing" class="mask-shdowing"><div id="mask-shdowing-loader"></div></div>
+
 {% endblock %}
 
 
 {% block hidden %}
-    {{ block.super }}
-    {% include 'team/team_create_form.html' %}
+{{ block.super }}
+{% include 'team/team_create_form.html' %}
 {% endblock %}
 
 
 {% block script %}
-    <script src="{% url 'team:api' %}"></script>       
-    <script src="{% static 'widgets/lightbox_form.js' %}"></script>
-    <script src="{% static 'widgets/list.js' %}"></script>    
-    <script src="{% static 'team/init.js' %}"></script>      
+{{ block.super }}
+<script src="{% url 'team:api' %}"></script>       
+<script src="{% static 'furst/form.js' %}"></script>
+<script src="{% static 'furst/list.js' %}"></script>
+<script src="{% static 'furst/toolbox.js' %}"></script>
+
+<script src="{% static 'team/init.js' %}"></script>      
 {% endblock %}
 

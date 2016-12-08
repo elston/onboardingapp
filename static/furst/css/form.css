@@ -1,23 +1,4 @@
 /*
-*  shdowing
-*/
-
-.form-shdowing {
-    display: none;
-    position: fixed;
-    top: 0%;
-    left: 0%;
-    width: 100%;
-    height: 100%;
-    background-color: #333;
-    z-index:10;
-    opacity:0.8;
-    filter: alpha(opacity=50);
-    text-align:center;
-    font-family:'helvetica_regular';
-}
-
-/*
 *  box
 */
 .form-box {
@@ -35,9 +16,14 @@
 
 @media only screen and (max-width: 768px) {
     .form-box {
-        width: 94% !important;
-        left: 3% !important;
+        width: 94%;
+        left: 3% ;
     }
+
+    .form-box.hugeled {
+        width: calc(94% - 250px);
+        left: calc(3% + 250px) ;        
+    }    
 }
 
 /*

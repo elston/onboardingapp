@@ -1,71 +1,42 @@
-
-$.ns('Cls.ToolboxTeamList');
-Cls.ToolboxTeamList = $.inherit($.util.Observable, {
-    // ..
-    toolbox_id:'',
-    form:null,
-    // ...
-    btn_create_id:'create-btn',
-    btn_remove_id:'remove-btn',    
-    // ..
-    btnCreate:null,
-    btnRemove:null,    
-    // ..
-    constructor : function(config){
-        // ...
-        $.extend(this, config);
-        // ...
-        this.btnCreate = $("#"+this.toolbox_id+"__"+this.btn_create_id);
-        this.btnRemove = $("#"+this.toolbox_id+"__"+this.btn_remove_id);
-
-        // ..
-        Cls.ToolboxTeamList.superclass.constructor.call(this, config);
-        // ..
-        this.btnCreate.on('click',this,this.create);            
-        this.btnRemove.on('click',this,this.remove);                    
-    },
-
-    create:function (e) {
-        // ...
-        var me = e.data;
-        // ...
-        e.preventDefault();
-        me.form.open();
-    },
-
-    remove:function (e) {
-        var me  = e.data;
-        var currentrecord = me.list.getCurrentRecord();
-        if (currentrecord){
-            console.log(currentrecord.attr('data-id'));
-        };
-    },
-
-});
-
-
-
 $(function($){
 
+
+
+    // ...
+    $.ns('App.LogoutDialog');
+    App.LogoutDialog = new Cls.Dialog({
+        dialog_id:'logout-dialog',
+    });
+
+    // ...
+    $.ns('App.Sidebar');
+    App.Sidebar = new Cls.Sidebar({
+        dialogLogout:App.LogoutDialog,
+    });    
+    
     // ..
+    $.ns('App.MenuToggleBtn');
+    App.MenuToggleBtn = new Cls.MenuToggleBtn();    
     App.MenuToggleBtn.add($('#team-list-toolbox'));
+    App.MenuToggleBtn.add($('#create-team-form_box'));
+    App.MenuToggleBtn.add($('#logout-dialog_box'));
 
     // ..
     $.ns('App.CreateTeamForm');
-    App.CreateTeamForm = new Furst.LightBoxForm({
+    App.CreateTeamForm = new Cls.Form({
         form_id:'create-team-form',
         action:TeamActions.create,        
-    });        
+    });
    
     // ..
     $.ns('App.TeamList');
-    App.TeamList = new Furst.List({
+    App.TeamList = new Cls.List({
         list_id:'team-list-data',
     });    
 
     // ..
     $.ns('App.ToolboxTeamList');
-    App.ToolboxTeamList = new Cls.ToolboxTeamList({
+    App.ToolboxTeamList = new Cls.ToolboxList({
         toolbox_id:'team-list-toolbox',
         form:App.CreateTeamForm,
         list:App.TeamList,

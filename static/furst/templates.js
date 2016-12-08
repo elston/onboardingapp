@@ -1,10 +1,10 @@
-$.ns('Furst.Template');
-Furst.Template = function(html){
+$.ns('Cls.Template');
+Cls.Template = function(html){
     var me = this;
     me.html = html;
 
 };
-Furst.Template.prototype = {
+Cls.Template.prototype = {
     // ...
     compile:function (kwargs) {
         var html = this.html;

@@ -1,0 +1,32 @@
+/*
+*  box
+*/
+.dialog-box {
+    z-index: 9999;
+    display: none;
+    position: fixed;
+    top: 10%;
+    left: 30%;
+    right: 25%;
+    width: 40%;
+    height: auto;
+    overflow: auto;
+    /**/
+    background-color: #e4e5e7;
+    padding: 35px;
+}
+
+.dialog-box p{
+    font-family: oswald-reg;    
+}
+
+@media only screen and (max-width: 768px) {
+    .dialog-box {
+        width: 94%;
+        left: 3%;
+    }
+
+    .dialog-box.hugeled {
+        width: calc(94% - 250px);
+    }        
+}

@@ -17,7 +17,10 @@
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;       
+    transition: all 0.5s ease;    
+
+    /*text*/
+    text-align: right;
 }
 
 #footer-wrapper.hugeled {
