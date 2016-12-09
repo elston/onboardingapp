@@ -27,13 +27,10 @@ Cls.ToolboxList = $.inherit($.util.Observable, {
 
     create:function (e) {
         // ...
-        // var me = e.data;
-        // // ...
-        // e.preventDefault();
-        // me.form.open();
-
-        this.shdowing_el    = $("#team-list-shdowing"); 
-        this.shdowing_el.css('display','block');               
+        var me = e.data;
+        // ...
+        e.preventDefault();
+        me.form.open();
     },
 
     remove:function (e) {

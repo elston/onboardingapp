@@ -42,4 +42,10 @@ $(function($){
         list:App.TeamList,
     });
 
+    // ....
+    $.ns('App.TeamListMask');
+    App.TeamListMask = new Cls.Mask({
+        mask_id:'team-list-mask',
+    });    
+
 });

@@ -18,6 +18,11 @@
 
 .dialog-box p{
     font-family: oswald-reg;    
+    text-align: center;    
+}
+
+.dialog-box .row{
+    text-align: center;
 }
 
 @media only screen and (max-width: 768px) {

@@ -27,7 +27,7 @@
 /*
 * Paginator
 */
-#team-list-paginator {
+.paginator {
     
     /*decoration*/
     background: #fff;
@@ -38,26 +38,38 @@
     width: 100%;
     z-index: 3;    
     bottom: 0px;
-    padding: 5px 15px;
+    padding: 3px 0px;
     height: 30px;        
 }
+.paginator .total {
+    padding: 0px 5px;
+}
 
+.paginator .bottons {
+    text-align: right;
+    padding: 0px 5px;    
+    vertical-align: middle;
+}
 
+.paginator .bottons input{
+    height: 19px;
+    width: 30px;
+}
 /*
 *   wrapper
 */
 #team-list-wrapper{
     position: relative;
     top: 53px;
-    height: calc(100% - 53px);
+    height: calc(100% - 53px - 30px);
     overflow-y: auto;    
     /*margin-top: calc(80px);*/
 }
 
 @media (max-width:768px) {
     #team-list-wrapper {
-    top: 97px;
-    height: calc(100% - 97px);
+        top: 97px;
+        height: calc(100% - 97px - 30px);
     }
 
 }
