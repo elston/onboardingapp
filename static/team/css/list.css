@@ -52,8 +52,11 @@
 }
 
 .paginator .bottons input{
-    height: 19px;
     width: 30px;
+    border-style: solid;
+    border-color: #ccc;
+    cursor: text;
+    padding: 1px 0px;
 }
 /*
 *   wrapper
