@@ -1,5 +1,5 @@
 
-OOPJavaScrit & RPC-django 1.9.5 python3 sqlite bootstrap 
+OOPJavaScript & RPC-django & Django 1.9.5  & python3 & sqlite & bootstrap 
 ==================
 
 
